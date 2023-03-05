@@ -17,4 +17,7 @@ class MemberEntity (
 
     @Column
     var confirm: Boolean = false
-): BaseEntity()
+): BaseEntity() {
+
+
+}
