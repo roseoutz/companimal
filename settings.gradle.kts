@@ -1,5 +1,8 @@
 rootProject.name = "companimal"
 
+include(
+    "api-server"
+)
 
 pluginManagement {
     val kotlinVersion: String by settings
