@@ -1,7 +1,7 @@
 package com.companimal.domain
 
 import com.companimal.common.AbstractDataJpaTest
-import com.companimal.domain.member.MemberEntity
+import com.companimal.infrastructure.member.MemberEntity
 import com.companimal.infrastructure.member.MemberRepository
 import jakarta.transaction.Transactional
 import org.junit.jupiter.api.Assertions
