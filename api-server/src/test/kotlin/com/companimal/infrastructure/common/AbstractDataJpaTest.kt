@@ -1,4 +1,4 @@
-package com.companimal.common
+package com.companimal.infrastructure.common
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest

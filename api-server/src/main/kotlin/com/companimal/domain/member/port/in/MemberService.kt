@@ -1,4 +1,4 @@
-package com.companimal.domain.member.port
+package com.companimal.domain.member.port.`in`
 
 import com.companimal.domain.member.models.Member
 

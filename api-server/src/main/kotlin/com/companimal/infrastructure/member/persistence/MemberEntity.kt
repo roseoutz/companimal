@@ -1,4 +1,4 @@
-package com.companimal.infrastructure.member
+package com.companimal.infrastructure.member.persistence
 
 import com.companimal.infrastructure.common.entity.BaseEntity
 import com.companimal.domain.member.models.Member
@@ -21,7 +21,6 @@ class MemberEntity (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 ): BaseEntity() {
-
     fun toMember(): Member {
         return Member(
             this.id,
@@ -30,6 +29,15 @@ class MemberEntity (
             this.confirm,
             this.createdDatetime,
             this.updatedDatetime
+        )
+    }
+
+    companion object {
+        fun of(member: Member):MemberEntity = MemberEntity(
+            id = member.id,
+            email = member.email,
+            password = member.password,
+            confirm = member.confirm,
         )
     }
 }
