@@ -1,31 +1,37 @@
 package com.companimal.application.member.adapter
 
-import com.companimal.domain.member.models.Member
-import com.companimal.domain.member.port.`in`.MemberServicePort
+import com.companimal.domain.member.Member
+import com.companimal.application.member.port.`in`.MemberPort
+import com.companimal.application.member.port.out.MemberPersistencePort
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class MemberAdapter(
-    private val memberServicePort: MemberServicePort
-) {
+    private val memberPersistencePort: MemberPersistencePort
+): MemberPort {
 
-    fun getMember(id: Long): Member {
-        return memberServicePort.getMember(id)
+    override fun getMember(id: Long): Member {
+        return memberPersistencePort.findById(id)
     }
 
-    fun getMemberByEmail(email: String): Member {
-        return memberServicePort.getMemberByEmail(email)
+    override fun getMemberByEmail(email: String): Member {
+        return memberPersistencePort.findByEmail(email)
     }
 
-    fun signUp(member: Member) {
-        memberServicePort.signUp(member)
+    @Transactional
+    override fun signUp(member: Member) {
+        memberPersistencePort.addMember(member)
     }
 
-    fun deleteMember(id: Long) {
-        memberServicePort.deleteMember(id)
+    @Transactional
+    override fun deleteMember(id: Long) {
+        memberPersistencePort.deleteMember(id)
     }
 
-    fun updatePassword(email: String, password: String) {
-        memberServicePort.updatePassword(email, password)
+    @Transactional
+    override fun updatePassword(email: String, password: String) {
+        memberPersistencePort.updatePassword(email, password)
     }
+
 }
