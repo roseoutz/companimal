@@ -1,5 +1,6 @@
 package com.companimal.infrastructure.member.persistence
 
+import com.companimal.domain.member.constants.MemberStatus
 import com.companimal.infrastructure.common.AbstractDataJpaTest
 import jakarta.transaction.Transactional
 import org.junit.jupiter.api.Assertions
@@ -60,10 +61,10 @@ class MemberPersistenceTest(
     fun `should delete member`() {
         val entity = memberRepository.save(getMemberEntity())
 
-        memberRepository.deleteById(entity.id!!)
+        entity.deleteMember()
+        val saved = memberRepository.save(entity)
 
-
-        Assertions.assertNull(memberRepository.findByIdOrNull(entity.id!!))
+        Assertions.assertEquals(MemberStatus.DELETED, saved.status!!)
     }
 
 }

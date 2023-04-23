@@ -1,5 +1,6 @@
 package com.companimal.infrastructure.member.adapter
 
+import com.companimal.domain.member.constants.MemberStatus
 import com.companimal.domain.member.exception.NoSuchMemberException
 import com.companimal.domain.member.models.Member
 import com.companimal.domain.member.port.out.MemberPersistencePort
@@ -30,13 +31,14 @@ class MemberJpaAdapter(
     }
 
     @Transactional(readOnly = true)
-    override fun updatePassword(id: Long, password: String) {
-        val entity = memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException()
+    override fun updatePassword(email: String, password: String) {
+        val entity = memberRepository.findByEmail(email) ?: throw NoSuchMemberException()
         entity.password = password
     }
 
     @Transactional(readOnly = true)
     override fun deleteMember(id: Long) {
-        memberRepository.deleteById(id)
+        val entity = memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException()
+        entity.deleteMember()
     }
 }

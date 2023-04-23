@@ -1,5 +1,6 @@
 package com.companimal.infrastructure.member.persistence
 
+import com.companimal.domain.member.constants.MemberStatus
 import com.companimal.infrastructure.common.entity.BaseEntity
 import com.companimal.domain.member.models.Member
 import jakarta.persistence.*
@@ -17,6 +18,9 @@ class MemberEntity (
     @Column
     var confirm: Boolean = false,
 
+    @Enumerated(EnumType.STRING)
+    var status: MemberStatus = MemberStatus.ACTIVE,
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -27,9 +31,15 @@ class MemberEntity (
             this.email,
             this.password,
             this.confirm,
+            this.status,
             this.createdDatetime,
             this.updatedDatetime
         )
+    }
+
+    fun deleteMember(): MemberEntity {
+        this.status = MemberStatus.DELETED
+        return this
     }
 
     companion object {
@@ -38,6 +48,7 @@ class MemberEntity (
             email = member.email,
             password = member.password,
             confirm = member.confirm,
+            status = member.status
         )
     }
 }

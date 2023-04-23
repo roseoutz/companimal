@@ -10,7 +10,7 @@ interface MemberPersistencePort {
 
     fun addMember(member: Member)
 
-    fun updatePassword(id: Long, password:String)
+    fun updatePassword(email: String, password:String)
 
     fun deleteMember(id: Long)
 
