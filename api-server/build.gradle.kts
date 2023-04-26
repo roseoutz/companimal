@@ -12,7 +12,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
 
     implementation("org.postgresql:postgresql:42.5.4")
+    implementation("com.h2database:h2")
 
 
-    testImplementation("com.h2database:h2")
 }
