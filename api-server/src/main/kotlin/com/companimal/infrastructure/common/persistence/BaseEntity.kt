@@ -1,4 +1,4 @@
-package com.companimal.infrastructure.common
+package com.companimal.infrastructure.common.persistence
 
 import jakarta.persistence.Column
 import jakarta.persistence.MappedSuperclass

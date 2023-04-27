@@ -1,7 +1,7 @@
 package com.companimal.infrastructure.member.persistence
 
 import com.companimal.domain.member.constants.MemberStatus
-import com.companimal.infrastructure.common.BaseEntity
+import com.companimal.infrastructure.common.persistence.BaseEntity
 import com.companimal.domain.member.dto.Member
 import jakarta.persistence.*
 
