@@ -17,8 +17,17 @@ class MemberJpaReader(
         return entity.toMember()
     }
 
+    override fun findByIdOrNull(id: Long): Member? {
+        return memberRepository.findById(id)
+            .let { it.get().toMember() }
+    }
+
     override fun findByEmail(email: String): Member {
         val entity = memberRepository.findByEmail(email) ?: throw NoSuchMemberException()
         return entity.toMember()
+    }
+
+    override fun findByEmailOrNull(email: String): Member? {
+        return memberRepository.findByEmail(email)?.toMember()
     }
 }
