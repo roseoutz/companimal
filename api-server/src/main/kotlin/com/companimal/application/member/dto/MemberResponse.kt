@@ -1,4 +1,4 @@
-package com.companimal.presentation.member.dto
+package com.companimal.application.member.dto
 
 import com.companimal.domain.member.constants.MemberStatus
 import com.companimal.domain.member.dto.Member
@@ -8,7 +8,7 @@ data class MemberResponse(
     val id: Long?,
     val email: String,
     val confirm: Boolean,
-    val status: MemberStatus,
+    val status: MemberStatus?,
     val createdDatetime: LocalDateTime?,
     val updatedDatetime: LocalDateTime?,
 ) {

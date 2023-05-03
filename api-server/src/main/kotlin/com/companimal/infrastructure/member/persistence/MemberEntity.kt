@@ -56,7 +56,7 @@ class MemberEntity (
             password = member.password,
             salt = member.salt!!,
             confirm = member.confirm,
-            status = member.status
+            status = member.status!!
         )
     }
 }

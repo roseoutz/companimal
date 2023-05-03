@@ -6,7 +6,7 @@ interface MemberStore {
 
     fun addMember(member: Member)
 
-    fun updatePassword(id: Long, password:String)
+    fun updatePassword(id: Long, password:String, salt: String)
 
     fun deleteMember(id: Long)
 
