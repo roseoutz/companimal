@@ -19,8 +19,8 @@ class MemberJpaStore(
         memberRepository.save(entity)
     }
 
-    override fun updatePassword(email: String, password: String) {
-        val entity = memberRepository.findByEmail(email) ?: throw NoSuchMemberException()
+    override fun updatePassword(id: Long, password: String) {
+        val entity = memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException()
         entity.password = password
     }
 

@@ -1,8 +1,9 @@
-package com.companimal.application
+package com.companimal.application.member
 
 import com.companimal.domain.member.command.MemberCommand
 import com.companimal.domain.member.service.MemberService
 import com.companimal.presentation.member.dto.MemberResponse
+import com.companimal.presentation.member.dto.PasswordChangeRequest
 import com.companimal.presentation.member.dto.SignUpRequest
 import org.springframework.stereotype.Service
 
@@ -19,8 +20,18 @@ class MemberFacade(
     fun signUp(signUpRequest: SignUpRequest) {
         memberService.createMember(
             MemberCommand.Companion.MemberCreateCommand(
-                signUpRequest.email,
-                signUpRequest.password
+                email = signUpRequest.email,
+                password = signUpRequest.password
+            )
+        )
+    }
+
+    fun passwordChange(passwordChangeRequest: PasswordChangeRequest) {
+        memberService.updatePassword(
+            MemberCommand.Companion.MemberPasswordChangeCommand(
+                id = passwordChangeRequest.id,
+                oldPassword = passwordChangeRequest.oldPassword,
+                newPassword = passwordChangeRequest.newPassword,
             )
         )
     }

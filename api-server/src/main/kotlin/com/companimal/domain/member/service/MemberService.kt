@@ -13,6 +13,6 @@ interface MemberService {
 
     fun deleteMember(id: Long)
 
-    fun updatePassword(email: String, password: String)
+    fun updatePassword(memberPasswordChangeCommand: MemberCommand.Companion.MemberPasswordChangeCommand)
 
 }

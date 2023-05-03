@@ -9,15 +9,18 @@ class MemberCommand {
             val email: String,
             val password: String,
         ) {
-
             fun toMember(): Member {
                 return Member(
                     email = email,
-                    password = password,
-                    confirm = false,
-                    status = MemberStatus.IN_ACTIVE
+                    password = password
                 )
             }
         }
+
+        data class MemberPasswordChangeCommand(
+            val id: Long,
+            val oldPassword: String,
+            val newPassword: String,
+        )
     }
 }

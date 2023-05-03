@@ -3,6 +3,7 @@ package com.companimal.domain.member.service
 import com.companimal.domain.crypto.service.HashEncoderService
 import com.companimal.domain.member.command.MemberCommand
 import com.companimal.domain.member.dto.Member
+import com.companimal.domain.member.exception.PasswordPolicyValidateException
 import com.companimal.domain.member.persistence.MemberReader
 import com.companimal.domain.member.persistence.MemberStore
 import org.springframework.stereotype.Service
@@ -44,9 +45,14 @@ class MemberServiceImpl(
     }
 
     @Transactional
-    override fun updatePassword(email: String, password: String) {
-        val encoded = hashEncoderService.encode(password)
-        memberStore.updatePassword(email, encoded)
+    override fun updatePassword(memberPasswordChangeCommand: MemberCommand.Companion.MemberPasswordChangeCommand) {
+
+        if (memberPasswordChangeCommand.newPassword == memberPasswordChangeCommand.oldPassword) {
+            throw PasswordPolicyValidateException()
+        }
+
+        val encoded = hashEncoderService.encode(memberPasswordChangeCommand.newPassword)
+        memberStore.updatePassword(memberPasswordChangeCommand.id, encoded)
     }
 
 }
