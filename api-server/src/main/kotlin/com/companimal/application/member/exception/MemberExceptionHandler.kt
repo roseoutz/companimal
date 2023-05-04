@@ -7,10 +7,12 @@ import com.companimal.domain.member.exception.AlreadyRegisteredEmailException
 import com.companimal.domain.member.exception.InvalidFormatPasswordException
 import com.companimal.domain.member.exception.NoSuchMemberException
 import com.companimal.domain.member.exception.PasswordInvalidException
+import org.springframework.core.annotation.Order
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
+@Order(0)
 @RestControllerAdvice
 class MemberExceptionHandler: BaseExceptionHandler() {
 

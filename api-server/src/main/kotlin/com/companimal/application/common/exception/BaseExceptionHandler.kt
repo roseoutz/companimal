@@ -4,10 +4,12 @@ import com.companimal.application.common.dto.Response
 import com.companimal.domain.common.constant.CommonErrorCode
 import com.companimal.domain.common.exception.CompanimalException
 import com.companimal.infrastructure.common.logger.Logger
+import org.springframework.core.annotation.Order
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
+@Order(99)
 @RestControllerAdvice
 class BaseExceptionHandler {
 

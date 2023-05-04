@@ -12,22 +12,11 @@ import org.springframework.transaction.annotation.Transactional
 class MemberJpaReader(
     private val memberRepository: MemberRepository
 ): MemberReader {
-    override fun findById(id: Long): Member {
-        val entity = memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException()
-        return entity.toMember()
-    }
+    override fun findById(id: Long): Member = memberRepository.findByIdOrNull(id)?.toMember() ?: throw NoSuchMemberException()
 
-    override fun findByIdOrNull(id: Long): Member? {
-        return memberRepository.findById(id)
-            .let { it.get().toMember() }
-    }
+    override fun findByIdOrNull(id: Long): Member? = memberRepository.findByIdOrNull(id)?.toMember()
 
-    override fun findByEmail(email: String): Member {
-        val entity = memberRepository.findByEmail(email) ?: throw NoSuchMemberException()
-        return entity.toMember()
-    }
+    override fun findByEmail(email: String): Member = memberRepository.findByEmail(email)?.toMember() ?: throw NoSuchMemberException()
 
-    override fun findByEmailOrNull(email: String): Member? {
-        return memberRepository.findByEmail(email)?.toMember()
-    }
+    override fun findByEmailOrNull(email: String): Member? = memberRepository.findByEmail(email)?.toMember()
 }
