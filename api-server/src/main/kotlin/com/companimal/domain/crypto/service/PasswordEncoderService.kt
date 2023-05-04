@@ -34,6 +34,14 @@ class PasswordEncoderService(
         return sb.toString()
     }
 
+    override fun match(plainText: String, encodeText: String): Boolean {
+        return encode(plainText) == encodeText
+    }
+
+    override fun match(plainText: String, salt: String?, encodeText: String): Boolean {
+        return encode(plainText + salt) == encodeText
+    }
+
     override fun encode(plainText: String): String {
         val algorithm = HashAlgorithm.of(passwordAlgorithm)
         val messageDigest = MessageDigest.getInstance(algorithm.getValue())

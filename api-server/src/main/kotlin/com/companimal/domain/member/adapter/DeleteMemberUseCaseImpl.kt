@@ -1,6 +1,8 @@
-package com.companimal.domain.member.usecase
+package com.companimal.domain.member.adapter
 
 import com.companimal.domain.member.persistence.MemberStore
+import com.companimal.domain.member.port.DeleteMemberRequest
+import com.companimal.domain.member.port.DeleteMemberUseCase
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

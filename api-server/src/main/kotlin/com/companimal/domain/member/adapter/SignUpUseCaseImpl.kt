@@ -1,10 +1,12 @@
-package com.companimal.domain.member.usecase
+package com.companimal.domain.member.adapter
 
 import com.companimal.domain.crypto.service.HashEncoderService
 import com.companimal.domain.member.dto.Member
-import com.companimal.domain.member.exception.AlreadyRegisterMemberException
+import com.companimal.domain.member.exception.AlreadyRegisteredEmailException
 import com.companimal.domain.member.persistence.MemberReader
 import com.companimal.domain.member.persistence.MemberStore
+import com.companimal.domain.member.port.SignUpRequest
+import com.companimal.domain.member.port.SignUpUseCase
 import org.springframework.stereotype.Service
 
 @Service
@@ -17,7 +19,7 @@ class SignUpUseCaseImpl(
         val member = memberReader.findByEmailOrNull(signUpRequest.email)
 
         if (member != null) {
-            throw AlreadyRegisterMemberException()
+            throw AlreadyRegisteredEmailException()
         }
 
         val salt = hashEncoderService.getSaltValue()

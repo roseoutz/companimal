@@ -1,4 +1,4 @@
-package com.companimal.domain.member.usecase
+package com.companimal.domain.member.port
 
 interface DeleteMemberUseCase {
     fun delete(deleteMemberRequest: DeleteMemberRequest)

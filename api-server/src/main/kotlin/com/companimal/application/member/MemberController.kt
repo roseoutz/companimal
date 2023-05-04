@@ -1,7 +1,9 @@
 package com.companimal.application.member
 
-import com.companimal.domain.member.usecase.*
+import com.companimal.application.common.dto.Response
 import com.companimal.application.member.dto.MemberResponse
+import com.companimal.domain.member.port.*
+import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -17,13 +19,13 @@ class MemberController(
     @GetMapping("/{id}")
     fun getMemberById(
         @PathVariable(name = "id", required = true) id: Long
-    ): ResponseEntity<MemberResponse> {
-        return ResponseEntity.ok(MemberResponse.of(getMemberUseCase.get(GetMemberRequest(id))))
+    ): ResponseEntity<Response> {
+        return ResponseEntity.ok(Response.ok(MemberResponse.of(getMemberUseCase.get(GetMemberRequest(id)))))
     }
 
     @PostMapping
     fun signUp(
-        @RequestBody signUpRequest: SignUpRequest
+        @Valid @RequestBody signUpRequest: SignUpRequest
     ): ResponseEntity<Void> {
         signUpUseCase.signUp(signUpRequest)
         return ResponseEntity.ok().build()
@@ -31,7 +33,7 @@ class MemberController(
 
     @PutMapping
     fun updatePassword(
-        @RequestBody changePasswordRequest: ChangePasswordRequest
+        @Valid @RequestBody changePasswordRequest: ChangePasswordRequest
     ): ResponseEntity<Void> {
         changePasswordUseCase.changePassword(changePasswordRequest)
         return ResponseEntity.ok().build()

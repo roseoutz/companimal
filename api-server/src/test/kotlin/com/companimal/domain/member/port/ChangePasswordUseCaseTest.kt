@@ -1,8 +1,7 @@
-package com.companimal.domain.member.usecase
+package com.companimal.domain.member.port
 
 import com.companimal.domain.crypto.service.HashEncoderService
-import com.companimal.domain.member.dto.Member
-import com.companimal.domain.member.exception.PasswordPolicyValidateException
+import com.companimal.domain.member.exception.InvalidFormatPasswordException
 import com.companimal.infrastructure.member.persistence.MemberEntity
 import com.companimal.infrastructure.member.persistence.MemberRepository
 import org.junit.jupiter.api.Assertions
@@ -62,7 +61,7 @@ class ChangePasswordUseCaseTest @Autowired constructor(
             newPassword = "test1234"
         )
 
-        Assertions.assertThrows(PasswordPolicyValidateException::class.java) {
+        Assertions.assertThrows(InvalidFormatPasswordException::class.java) {
             changePasswordUseCase.changePassword(
                 changePasswordRequest
             )

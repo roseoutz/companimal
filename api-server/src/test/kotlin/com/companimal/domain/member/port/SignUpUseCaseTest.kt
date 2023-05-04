@@ -1,4 +1,4 @@
-package com.companimal.domain.member.usecase
+package com.companimal.domain.member.port
 
 import com.companimal.infrastructure.member.persistence.MemberRepository
 import org.junit.jupiter.api.Assertions

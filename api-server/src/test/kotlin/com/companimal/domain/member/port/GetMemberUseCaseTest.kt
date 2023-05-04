@@ -1,4 +1,4 @@
-package com.companimal.domain.member.usecase
+package com.companimal.domain.member.port
 
 import com.companimal.domain.member.exception.NoSuchMemberException
 import com.companimal.infrastructure.member.persistence.MemberEntity
@@ -11,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional
 
 @Transactional
 @SpringBootTest
-class GetMemberByEmailUseCaseTest @Autowired constructor(
-    private val getMemberByEmailUseCase: GetMemberByEmailUseCase,
+class GetMemberUseCaseTest @Autowired constructor(
+    private val getMemberUseCase: GetMemberUseCase,
     private val memberRepository: MemberRepository,
 ) {
 
     @Test
-    fun `should get by user by email`() {
+    fun `should get by user by id`() {
         val memberEntity = MemberEntity(
             email = "test@test.com",
             password = "password",
@@ -25,17 +25,18 @@ class GetMemberByEmailUseCaseTest @Autowired constructor(
         )
         val savedEntity = memberRepository.save(memberEntity)
 
-        val member = getMemberByEmailUseCase.get(GetMemberByEmailRequest(memberEntity.email))
+        val member = getMemberUseCase.get(GetMemberRequest(savedEntity.id!!))
 
         Assertions.assertNotNull(member)
     }
 
+
     @Test
-    fun `should getByEmail throw NoSuchMemberException`() {
-        val email = "test@test.com"
+    fun `should getById throw NoSuchMemberException`() {
+        val id = 1L
 
         Assertions.assertThrows(NoSuchMemberException::class.java) {
-            getMemberByEmailUseCase.get(GetMemberByEmailRequest(email))
+            getMemberUseCase.get(GetMemberRequest(id))
         }
     }
 }

@@ -1,23 +1,23 @@
-package com.companimal.domain.member.usecase
+package com.companimal.domain.member.port
 
-import com.companimal.domain.member.constants.MemberStatus
+import com.companimal.domain.member.exception.NoSuchMemberException
 import com.companimal.infrastructure.member.persistence.MemberEntity
 import com.companimal.infrastructure.member.persistence.MemberRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.transaction.annotation.Transactional
 
+@Transactional
 @SpringBootTest
-class DeleteMemberUseCaseTest @Autowired constructor(
-    private val deleteMemberUseCase: DeleteMemberUseCase,
+class GetMemberByEmailUseCaseTest @Autowired constructor(
+    private val getMemberByEmailUseCase: GetMemberByEmailUseCase,
     private val memberRepository: MemberRepository,
 ) {
 
     @Test
-    fun `should delete member`() {
+    fun `should get by user by email`() {
         val memberEntity = MemberEntity(
             email = "test@test.com",
             password = "password",
@@ -25,12 +25,17 @@ class DeleteMemberUseCaseTest @Autowired constructor(
         )
         val savedEntity = memberRepository.save(memberEntity)
 
-        deleteMemberUseCase.delete(DeleteMemberRequest(savedEntity.id!!))
+        val member = getMemberByEmailUseCase.get(GetMemberByEmailRequest(memberEntity.email))
 
-        val entity = memberRepository.findByIdOrNull(savedEntity.id!!) ?: Assertions.fail()
-
-        Assertions.assertEquals(MemberStatus.DELETED, entity.status)
-
+        Assertions.assertNotNull(member)
     }
 
+    @Test
+    fun `should getByEmail throw NoSuchMemberException`() {
+        val email = "test@test.com"
+
+        Assertions.assertThrows(NoSuchMemberException::class.java) {
+            getMemberByEmailUseCase.get(GetMemberByEmailRequest(email))
+        }
+    }
 }

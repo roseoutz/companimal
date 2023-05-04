@@ -10,6 +10,7 @@ tasks.getByName("jar") {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 
     implementation("org.postgresql:postgresql:42.5.4")
     implementation("com.h2database:h2")

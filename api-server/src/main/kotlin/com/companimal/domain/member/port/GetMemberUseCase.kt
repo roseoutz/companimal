@@ -1,4 +1,4 @@
-package com.companimal.domain.member.usecase
+package com.companimal.domain.member.port
 
 import com.companimal.domain.member.dto.Member
 
