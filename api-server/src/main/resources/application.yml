@@ -1,0 +1,13 @@
+server:
+  port: 80
+
+spring:
+  config:
+    import:
+      - 'classpath:profile/application-test.yml'
+      - 'classpath:profile/application-local.yml'
+      - 'classpath:profile/application-dev.yml'
+      - 'classpath:profile/application-prod.yml'
+  profiles:
+    active: local
+

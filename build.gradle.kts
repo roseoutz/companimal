@@ -32,13 +32,12 @@ subprojects {
     apply(plugin = "org.asciidoctor.jvm.convert")
     apply(plugin = "org.jmailen.kotlinter")
 
-    dependencyManagement {
-        imports {
-            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudDependenciesVersion")}")
-        }
-    }
+
 
     dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-log4j2") {
+            exclude("org.apache.logging.log4j", "log4j-slf4j2-impl")
+        }
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -46,6 +45,13 @@ subprojects {
         testImplementation("com.ninja-squad:springmockk:${property("springMockkVersion")}")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
         kapt("org.springframework.boot:spring-boot-configuration-processor")
+    }
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "17"
+        }
     }
 
     tasks.getByName("bootJar") {
@@ -57,12 +63,7 @@ subprojects {
     }
 
     java.sourceCompatibility = JavaVersion.valueOf("VERSION_${property("javaVersion")}")
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "${project.property("javaVersion")}"
-        }
-    }
+
 
     tasks.withType<Test> {
         useJUnitPlatform {
