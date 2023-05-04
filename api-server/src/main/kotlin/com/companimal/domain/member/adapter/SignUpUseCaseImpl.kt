@@ -16,11 +16,7 @@ class SignUpUseCaseImpl(
     private val hashEncoderService: HashEncoderService,
 ): SignUpUseCase {
     override fun signUp(signUpRequest: SignUpRequest) {
-        val member = memberReader.findByEmailOrNull(signUpRequest.email)
-
-        if (member != null) {
-            throw AlreadyRegisteredEmailException()
-        }
+        checkRegisteredEmail(signUpRequest)
 
         val salt = hashEncoderService.getSaltValue()
         val encoded = hashEncoderService.encode(signUpRequest.password, salt)
@@ -31,5 +27,9 @@ class SignUpUseCaseImpl(
                 salt = salt,
             )
         )
+    }
+
+    private fun checkRegisteredEmail(signUpRequest: SignUpRequest) {
+        memberReader.findByEmail(signUpRequest.email)?.run { throw AlreadyRegisteredEmailException() }
     }
 }

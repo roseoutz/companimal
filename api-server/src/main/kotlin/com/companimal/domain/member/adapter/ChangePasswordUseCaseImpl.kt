@@ -29,7 +29,7 @@ class ChangePasswordUseCaseImpl(
     }
 
     private fun checkVerifyPassword(changePasswordRequest: ChangePasswordRequest) {
-        val member = memberReader.findByIdOrNull(changePasswordRequest.id) ?: throw NoSuchMemberException()
+        val member = memberReader.findById(changePasswordRequest.id) ?: throw NoSuchMemberException()
 
         if (!hashEncoderService.match(changePasswordRequest.oldPassword, member.salt, member.password)) {
             throw PasswordInvalidException()
