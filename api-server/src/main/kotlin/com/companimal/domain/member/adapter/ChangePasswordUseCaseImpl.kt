@@ -41,7 +41,7 @@ class ChangePasswordUseCaseImpl(
             throw CannotUseSamePasswordException()
         }
 
-        if (!changePasswordRequest.newPassword.matches(Regex(""))) {
+        if (!changePasswordRequest.newPassword.matches(Regex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}\$"))) {
             throw InvalidFormatPasswordException()
         }
     }

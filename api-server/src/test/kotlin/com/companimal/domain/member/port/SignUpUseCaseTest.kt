@@ -1,5 +1,6 @@
 package com.companimal.domain.member.port
 
+import com.companimal.domain.member.exception.AlreadyRegisteredEmailException
 import com.companimal.infrastructure.member.persistence.MemberRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -25,6 +26,17 @@ class SignUpUseCaseTest @Autowired constructor(
         val entity = memberRepository.findByEmail(signUpRequest.email)
 
         Assertions.assertNotNull(entity)
+    }
+
+    @Test
+    fun `should throw alreadyRegisteredEmail Exception`() {
+        val signUpRequest = SignUpRequest(
+            "test@test.com",
+            "test1234"
+        )
+        signUpUseCase.signUp(signUpRequest)
+
+        Assertions.assertThrows(AlreadyRegisteredEmailException::class.java) { signUpUseCase.signUp(signUpRequest) }
     }
 
 }

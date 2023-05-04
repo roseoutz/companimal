@@ -1,10 +1,13 @@
 package com.companimal.domain.member.port
 
 import com.companimal.domain.crypto.service.HashEncoderService
+import com.companimal.domain.member.exception.CannotUseSamePasswordException
 import com.companimal.domain.member.exception.InvalidFormatPasswordException
+import com.companimal.domain.member.exception.PasswordInvalidException
 import com.companimal.infrastructure.member.persistence.MemberEntity
 import com.companimal.infrastructure.member.persistence.MemberRepository
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -44,7 +47,7 @@ class ChangePasswordUseCaseTest @Autowired constructor(
     }
 
     @Test
-    fun `should fail change password`() {
+    fun `should cannot use same password`() {
         val salt = hashEncoderService.getSaltValue()
         val encodedPassword = hashEncoderService.encode("test1234$salt")
         val memberEntity = MemberEntity(
@@ -59,6 +62,56 @@ class ChangePasswordUseCaseTest @Autowired constructor(
             id = savedEntity.id!!,
             oldPassword = "test1234",
             newPassword = "test1234"
+        )
+
+        Assertions.assertThrows(CannotUseSamePasswordException::class.java) {
+            changePasswordUseCase.changePassword(
+                changePasswordRequest
+            )
+        }
+    }
+
+    @Test
+    fun `should fail not match old password`() {
+        val salt = hashEncoderService.getSaltValue()
+        val encodedPassword = hashEncoderService.encode("test1234$salt")
+        val memberEntity = MemberEntity(
+            email = "test@test.com",
+            password = encodedPassword,
+            salt = salt
+        )
+        val savedEntity = memberRepository.save(memberEntity)
+
+
+        val changePasswordRequest = ChangePasswordRequest(
+            id = savedEntity.id!!,
+            oldPassword = "test",
+            newPassword = "test1234"
+        )
+
+        Assertions.assertThrows(PasswordInvalidException::class.java) {
+            changePasswordUseCase.changePassword(
+                changePasswordRequest
+            )
+        }
+    }
+
+    @Test
+    fun `should fail invalid password format`() {
+        val salt = hashEncoderService.getSaltValue()
+        val encodedPassword = hashEncoderService.encode("test1234$salt")
+        val memberEntity = MemberEntity(
+            email = "test@test.com",
+            password = encodedPassword,
+            salt = salt
+        )
+        val savedEntity = memberRepository.save(memberEntity)
+
+
+        val changePasswordRequest = ChangePasswordRequest(
+            id = savedEntity.id!!,
+            oldPassword = "test1234",
+            newPassword = "testtest"
         )
 
         Assertions.assertThrows(InvalidFormatPasswordException::class.java) {
