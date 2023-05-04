@@ -8,6 +8,7 @@ enum class MemberErrorCode(private val errorMessage: String): ErrorCode {
     INVALID_FORMAT_PASSWORD("비밀번호 정책에 부합하지 않은 비밀번호 입니다."),
     INVALID_PASSWORD("비밀번호가 옳바르지 않습니다."),
     SAME_PASSWORD("기존 비밀번호와 신규 비밀번호는 동일할 수 없습니다."),
+    INVALID_FORMAT_EMAIL("옳바르지 않은 이메일 형식입니다."),
     ;
 
     override fun getErrorCode(): String {

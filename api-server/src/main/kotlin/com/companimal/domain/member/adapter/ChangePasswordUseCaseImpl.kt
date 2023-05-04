@@ -1,5 +1,6 @@
 package com.companimal.domain.member.adapter
 
+import com.companimal.domain.common.validation.PasswordValidator
 import com.companimal.domain.crypto.service.HashEncoderService
 import com.companimal.domain.member.exception.InvalidFormatPasswordException
 import com.companimal.domain.member.exception.NoSuchMemberException
@@ -41,7 +42,7 @@ class ChangePasswordUseCaseImpl(
             throw CannotUseSamePasswordException()
         }
 
-        if (!changePasswordRequest.newPassword.matches(Regex("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}\$"))) {
+        if (!PasswordValidator.validate(changePasswordRequest.newPassword)) {
             throw InvalidFormatPasswordException()
         }
     }
