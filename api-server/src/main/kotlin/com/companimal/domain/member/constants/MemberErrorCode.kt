@@ -11,11 +11,9 @@ enum class MemberErrorCode(private val errorMessage: String): ErrorCode {
     INVALID_FORMAT_EMAIL("옳바르지 않은 이메일 형식입니다."),
     ;
 
-    override fun getErrorCode(): String {
-        return this.name
-    }
+    override fun getErrorCode(): String = this.name
 
-    override fun getErrorMessage(): String {
-        return this.errorMessage
-    }
+    override fun getErrorMessage(): String = this.errorMessage
+
+    override fun getErrorMessage(param: String?): String = this.errorMessage.plus(param)
 }

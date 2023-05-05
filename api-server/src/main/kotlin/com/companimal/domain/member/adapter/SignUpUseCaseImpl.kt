@@ -5,12 +5,10 @@ import com.companimal.domain.common.validation.PasswordValidator
 import com.companimal.domain.crypto.service.HashEncoderService
 import com.companimal.domain.member.dto.Member
 import com.companimal.domain.member.exception.AlreadyRegisteredEmailException
-import com.companimal.domain.member.exception.CannotUseSamePasswordException
 import com.companimal.domain.member.exception.InvalidFormatEmailException
 import com.companimal.domain.member.exception.InvalidFormatPasswordException
 import com.companimal.domain.member.persistence.MemberReader
 import com.companimal.domain.member.persistence.MemberStore
-import com.companimal.domain.member.port.ChangePasswordRequest
 import com.companimal.domain.member.port.SignUpRequest
 import com.companimal.domain.member.port.SignUpUseCase
 import org.springframework.stereotype.Service

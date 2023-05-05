@@ -25,7 +25,7 @@ class GetMemberUseCaseTest @Autowired constructor(
         )
         val savedEntity = memberRepository.save(memberEntity)
 
-        val member = getMemberUseCase.get(GetMemberRequest(savedEntity.id!!))
+        val member = getMemberUseCase.get(savedEntity.id!!)
 
         Assertions.assertNotNull(member)
     }
@@ -36,7 +36,7 @@ class GetMemberUseCaseTest @Autowired constructor(
         val id = 1L
 
         Assertions.assertThrows(NoSuchMemberException::class.java) {
-            getMemberUseCase.get(GetMemberRequest(id))
+            getMemberUseCase.get(id)
         }
     }
 }

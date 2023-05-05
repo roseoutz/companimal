@@ -25,7 +25,7 @@ class GetMemberByEmailUseCaseTest @Autowired constructor(
         )
         val savedEntity = memberRepository.save(memberEntity)
 
-        val member = getMemberByEmailUseCase.get(GetMemberByEmailRequest(memberEntity.email))
+        val member = getMemberByEmailUseCase.get(memberEntity.email)
 
         Assertions.assertNotNull(member)
     }
@@ -35,7 +35,7 @@ class GetMemberByEmailUseCaseTest @Autowired constructor(
         val email = "test@test.com"
 
         Assertions.assertThrows(NoSuchMemberException::class.java) {
-            getMemberByEmailUseCase.get(GetMemberByEmailRequest(email))
+            getMemberByEmailUseCase.get(email)
         }
     }
 }

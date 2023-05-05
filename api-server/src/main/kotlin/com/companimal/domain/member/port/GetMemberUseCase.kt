@@ -4,9 +4,5 @@ import com.companimal.domain.member.dto.Member
 
 interface GetMemberUseCase {
 
-    fun get(getMemberRequest: GetMemberRequest): Member
+    fun get(id: Long): Member
 }
-
-data class GetMemberRequest(
-    val id: Long,
-)

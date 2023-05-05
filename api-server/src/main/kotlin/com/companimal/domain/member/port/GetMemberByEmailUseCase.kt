@@ -4,9 +4,5 @@ import com.companimal.domain.member.dto.Member
 
 interface GetMemberByEmailUseCase {
 
-    fun get(getMemberByEmailRequest: GetMemberByEmailRequest): Member
+    fun get(email: String): Member
 }
-
-data class GetMemberByEmailRequest(
-    val email: String,
-)

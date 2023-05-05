@@ -6,4 +6,6 @@ interface ErrorCode {
 
     fun getErrorMessage(): String
 
+    fun getErrorMessage(param: String?): String
+
 }

@@ -1,9 +1,5 @@
 package com.companimal.domain.member.port
 
 interface DeleteMemberUseCase {
-    fun delete(deleteMemberRequest: DeleteMemberRequest)
+    fun delete(id: Long)
 }
-
-data class DeleteMemberRequest(
-    val id: Long,
-)

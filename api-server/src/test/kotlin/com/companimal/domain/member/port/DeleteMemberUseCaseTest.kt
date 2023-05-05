@@ -24,7 +24,7 @@ class DeleteMemberUseCaseTest @Autowired constructor(
         )
         val savedEntity = memberRepository.save(memberEntity)
 
-        deleteMemberUseCase.delete(DeleteMemberRequest(savedEntity.id!!))
+        deleteMemberUseCase.delete(savedEntity.id!!)
 
         val entity = memberRepository.findByIdOrNull(savedEntity.id!!) ?: Assertions.fail()
 
