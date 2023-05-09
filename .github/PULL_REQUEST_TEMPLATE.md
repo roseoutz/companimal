@@ -1,7 +1,8 @@
 # **작업 구분**
+- [ ] New Feature
 - [ ] Bug Fix
 - [ ] Hot Fix
-- [ ] New Feature
+- [ ] Refactoring
 - [ ] Breaking Change
 - [ ] Documentation Update
 
