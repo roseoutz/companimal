@@ -1,11 +1,13 @@
 package com.companimal.member.domain.port
 
 import com.companimal.crypto.domain.port.HashEncoderPort
-import com.companimal.member.domain.exception.CannotUseSamePasswordException
-import com.companimal.member.domain.exception.InvalidFormatPasswordException
-import com.companimal.member.domain.exception.PasswordInvalidException
-import com.companimal.member.infrastructure.persistence.MemberEntity
-import com.companimal.member.infrastructure.persistence.MemberRepository
+import com.companimal.auth.member.domain.exception.CannotUseSamePasswordException
+import com.companimal.auth.member.domain.exception.InvalidFormatPasswordException
+import com.companimal.auth.member.domain.exception.PasswordInvalidException
+import com.companimal.auth.member.domain.port.ChangePasswordRequest
+import com.companimal.auth.member.domain.port.ChangePasswordUseCasePort
+import com.companimal.auth.member.infrastructure.persistence.MemberEntity
+import com.companimal.auth.member.infrastructure.persistence.MemberRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

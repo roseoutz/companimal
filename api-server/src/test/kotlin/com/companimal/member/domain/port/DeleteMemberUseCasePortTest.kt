@@ -1,8 +1,9 @@
 package com.companimal.member.domain.port
 
-import com.companimal.member.domain.constants.MemberStatus
-import com.companimal.member.infrastructure.persistence.MemberEntity
-import com.companimal.member.infrastructure.persistence.MemberRepository
+import com.companimal.auth.member.domain.constants.MemberStatus
+import com.companimal.auth.member.domain.port.DeleteMemberUseCasePort
+import com.companimal.auth.member.infrastructure.persistence.MemberEntity
+import com.companimal.auth.member.infrastructure.persistence.MemberRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

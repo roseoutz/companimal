@@ -1,8 +1,9 @@
 package com.companimal.member.domain.port
 
-import com.companimal.member.domain.exception.NoSuchMemberException
-import com.companimal.member.infrastructure.persistence.MemberEntity
-import com.companimal.member.infrastructure.persistence.MemberRepository
+import com.companimal.auth.member.domain.port.GetMemberByEmailUseCasePort
+import com.companimal.auth.member.domain.exception.NoSuchMemberException
+import com.companimal.auth.member.infrastructure.persistence.MemberEntity
+import com.companimal.auth.member.infrastructure.persistence.MemberRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

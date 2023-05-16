@@ -1,6 +1,8 @@
 package com.companimal.member.infrastructure.persistence
 
-import com.companimal.member.domain.constants.MemberStatus
+import com.companimal.auth.member.domain.constants.MemberStatus
+import com.companimal.auth.member.infrastructure.persistence.MemberEntity
+import com.companimal.auth.member.infrastructure.persistence.MemberRepository
 import jakarta.transaction.Transactional
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName

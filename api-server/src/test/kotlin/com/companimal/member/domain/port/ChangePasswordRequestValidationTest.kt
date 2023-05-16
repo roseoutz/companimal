@@ -1,5 +1,6 @@
 package com.companimal.member.domain.port
 
+import com.companimal.auth.member.domain.port.ChangePasswordRequest
 import jakarta.validation.Validation
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
