@@ -9,10 +9,10 @@ import java.time.LocalDateTime
 @MappedSuperclass
 abstract class BaseEntity (
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(name = "created_datetime", updatable = false)
     val createdDatetime: LocalDateTime? = null,
 
     @UpdateTimestamp
-    @Column
+    @Column(name = "updated_datetime")
     var updatedDatetime: LocalDateTime? = null
 )

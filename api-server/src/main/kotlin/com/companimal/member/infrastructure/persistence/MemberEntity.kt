@@ -12,19 +12,20 @@ import jakarta.persistence.*
 )
 class MemberEntity (
 
-    @Column(length = 32, unique = true, nullable = false)
+    @Column(name = "email", length = 32, unique = true, nullable = false)
     var email: String,
 
-    @Column(length = 50, columnDefinition = "text", nullable = false)
+    @Column(name = "password", length = 50, columnDefinition = "text", nullable = false)
     var password: String,
 
-    @Column(length = 32, columnDefinition = "text", nullable = false)
+    @Column(name = "salt", length = 32, columnDefinition = "text", nullable = false)
     var salt: String,
 
-    @Column
+    @Column(name = "confirm")
     var confirm: Boolean = false,
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     var status: MemberStatus = MemberStatus.ACTIVE,
 
     @Id
