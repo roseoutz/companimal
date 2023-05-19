@@ -1,6 +1,5 @@
-package com.companimal.member.domain.port
+package com.companimal.auth.member.domain.port
 
-import com.companimal.auth.member.domain.port.GetMemberByEmailUseCasePort
 import com.companimal.auth.member.domain.exception.NoSuchMemberException
 import com.companimal.auth.member.infrastructure.persistence.MemberEntity
 import com.companimal.auth.member.infrastructure.persistence.MemberRepository
@@ -12,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional
 
 @Transactional
 @SpringBootTest
-class GetMemberByEmailUseCasePortTest @Autowired constructor(
-    private val getMemberByEmailUseCasePort: GetMemberByEmailUseCasePort,
+class GetMemberUseCasePortTest @Autowired constructor(
+    private val getMemberUseCasePort: GetMemberUseCasePort,
     private val memberRepository: MemberRepository,
 ) {
 
     @Test
-    fun `should get by user by email`() {
+    fun `should get by user by id`() {
         val memberEntity = MemberEntity(
             email = "test@test.com",
             password = "password",
@@ -26,17 +25,18 @@ class GetMemberByEmailUseCasePortTest @Autowired constructor(
         )
         val savedEntity = memberRepository.save(memberEntity)
 
-        val member = getMemberByEmailUseCasePort.get(memberEntity.email)
+        val member = getMemberUseCasePort.get(savedEntity.id!!)
 
         Assertions.assertNotNull(member)
     }
 
+
     @Test
-    fun `should getByEmail throw NoSuchMemberException`() {
-        val email = "test@test.com"
+    fun `should getById throw NoSuchMemberException`() {
+        val id = 1L
 
         Assertions.assertThrows(NoSuchMemberException::class.java) {
-            getMemberByEmailUseCasePort.get(email)
+            getMemberUseCasePort.get(id)
         }
     }
 }

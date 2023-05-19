@@ -1,11 +1,9 @@
-package com.companimal.member.domain.port
+package com.companimal.auth.member.domain.port
 
 import com.companimal.crypto.domain.port.HashEncoderPort
 import com.companimal.auth.member.domain.exception.CannotUseSamePasswordException
 import com.companimal.auth.member.domain.exception.InvalidFormatPasswordException
 import com.companimal.auth.member.domain.exception.PasswordInvalidException
-import com.companimal.auth.member.domain.port.ChangePasswordRequest
-import com.companimal.auth.member.domain.port.ChangePasswordUseCasePort
 import com.companimal.auth.member.infrastructure.persistence.MemberEntity
 import com.companimal.auth.member.infrastructure.persistence.MemberRepository
 import org.junit.jupiter.api.Assertions

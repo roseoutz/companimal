@@ -1,8 +1,6 @@
-package com.companimal.member.domain.port
+package com.companimal.auth.member.domain.port
 
 import com.companimal.auth.member.domain.exception.AlreadyRegisteredEmailException
-import com.companimal.auth.member.domain.port.SignUpRequest
-import com.companimal.auth.member.domain.port.SignUpUseCasePort
 import com.companimal.auth.member.infrastructure.persistence.MemberRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

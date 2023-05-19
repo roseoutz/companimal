@@ -1,6 +1,5 @@
-package com.companimal.member.domain.port
+package com.companimal.auth.member.domain.port
 
-import com.companimal.auth.member.domain.port.SignUpRequest
 import jakarta.validation.Validation
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions

@@ -1,4 +1,4 @@
-package com.companimal.member.infrastructure.persistence
+package com.companimal
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest

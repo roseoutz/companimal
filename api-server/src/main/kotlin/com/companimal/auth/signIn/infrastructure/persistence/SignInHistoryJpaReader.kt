@@ -1,4 +1,10 @@
 package com.companimal.auth.signIn.infrastructure.persistence
 
-class SignInHistoryJpaReader {
+import com.companimal.auth.signIn.domain.persistence.SignInHistoryReader
+import org.springframework.stereotype.Service
+
+@Service
+class SignInHistoryJpaReader(
+    private val signInHistoryRepository: SignInHistoryRepository
+): SignInHistoryReader {
 }

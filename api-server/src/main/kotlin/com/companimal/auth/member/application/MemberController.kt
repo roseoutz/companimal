@@ -1,9 +1,8 @@
 package com.companimal.auth.member.application
 
+import com.companimal.auth.member.application.dto.MemberResponse
 import com.companimal.auth.member.domain.port.*
 import com.companimal.common.application.dto.ResponseDTO
-import com.companimal.auth.member.application.dto.MemberResponse
-import com.companimal.member.domain.port.*
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.responses.ApiResponse

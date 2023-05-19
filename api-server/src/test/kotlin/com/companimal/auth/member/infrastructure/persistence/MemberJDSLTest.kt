@@ -1,7 +1,6 @@
-package com.companimal.member.infrastructure.persistence
+package com.companimal.auth.member.infrastructure.persistence
 
-import com.companimal.auth.member.infrastructure.persistence.MemberEntity
-import com.companimal.auth.member.infrastructure.persistence.MemberRepository
+import com.companimal.AbstractDataJpaTest
 import com.linecorp.kotlinjdsl.QueryFactory
 import com.linecorp.kotlinjdsl.QueryFactoryImpl
 import com.linecorp.kotlinjdsl.query.creator.CriteriaQueryCreatorImpl

@@ -1,5 +1,6 @@
 package com.companimal.auth.signIn.infrastructure.persistence
 
+import com.companimal.auth.signIn.domain.dto.SignInHistory
 import com.companimal.common.infrastructure.persistence.BaseEntity
 import jakarta.persistence.*
 
@@ -10,18 +11,38 @@ import jakarta.persistence.*
 )
 class SignInHistoryEntity(
 
-    @Column(name = "session_id", length = 32, unique = true, nullable = false)
+    @Column(name = "session_id", length = 36, unique = true, nullable = false)
     var sessionId: String,
 
     @Column(length = 32, unique = true, nullable = false)
-    var memberId: String,
+    var memberId: Long,
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "session_id")
-    val tokenPublishHistoryList: List<com.companimal.auth.signIn.infrastructure.persistence.TokenPublishHistoryEntity> = listOf(),
+    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL], mappedBy = "sessionId")
+    val tokenPublishHistoryList: MutableList<TokenPublishHistoryEntity> = mutableListOf(),
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 ): BaseEntity() {
+
+    fun toSignInHistory(): SignInHistory =
+        SignInHistory(
+            sessionId = this.sessionId,
+            memberId = this.memberId,
+            tokenPublishHistoryList = this.tokenPublishHistoryList.map { it.toTokenPublishHistory() },
+            id = this.id,
+            createdDatetime = this.createdDatetime,
+            updatedDatetime = this.updatedDatetime,
+        )
+
+
+    companion object {
+        fun of(signInHistory: SignInHistory): SignInHistoryEntity =
+            SignInHistoryEntity(
+                sessionId = signInHistory.sessionId,
+                memberId = signInHistory.memberId,
+                tokenPublishHistoryList = signInHistory.tokenPublishHistoryList.map { TokenPublishHistoryEntity.of(it) }.toMutableList(),
+                id = signInHistory.id
+            )
+    }
 }
