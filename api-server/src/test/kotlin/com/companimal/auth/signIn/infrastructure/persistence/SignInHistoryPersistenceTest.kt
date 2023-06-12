@@ -1,7 +1,11 @@
 package com.companimal.auth.signIn.infrastructure.persistence
 
 import com.companimal.AbstractDataJpaTest
-import com.companimal.auth.signIn.domain.constants.SignInSourceType
+import com.companimal.signIn.domain.constants.SignInSourceType
+import com.companimal.signIn.infrastructure.persistence.SignInHistoryEntity
+import com.companimal.signIn.infrastructure.persistence.SignInHistoryRepository
+import com.companimal.signIn.infrastructure.persistence.TokenPublishHistoryEntity
+import com.companimal.signIn.infrastructure.persistence.TokenPublishHistoryRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
@@ -41,11 +45,13 @@ class SignInHistoryPersistenceTest @Autowired private constructor(
     @Test
     fun `should save sign in history with token publish`() {
         val entity = getSignInHistoryEntity().let {
-            it.tokenPublishHistoryList.add(TokenPublishHistoryEntity(
+            it.tokenPublishHistoryList.add(
+                TokenPublishHistoryEntity(
                 sessionId = it.sessionId,
                 signInSourceType = SignInSourceType.WEB,
                 expiredDateTime = LocalDateTime.now()
-            ))
+            )
+            )
             it
         }
 
