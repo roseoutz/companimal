@@ -2,7 +2,7 @@ package com.companimal.auth.member.infrastructure.persistence
 
 import com.companimal.common.infrastructure.persistence.BaseEntity
 import com.companimal.auth.member.domain.constants.MemberStatus
-import com.companimal.auth.member.domain.constants.AuthenticationProvider
+import com.companimal.auth.member.domain.constants.OAuthServiceProvider
 import com.companimal.auth.member.domain.dto.Member
 import jakarta.persistence.*
 
@@ -27,7 +27,7 @@ class MemberEntity (
 
     @Enumerated(EnumType.STRING)
     @Column(name = "oauth_provider")
-    var authenticationProvider: AuthenticationProvider? = AuthenticationProvider.NONE,
+    var oauthServiceProvider: OAuthServiceProvider? = OAuthServiceProvider.NONE,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -43,7 +43,7 @@ class MemberEntity (
             email = this.email,
             password = this.password,
             salt = this.salt,
-            authenticationProvider = this.authenticationProvider,
+            oauthServiceProvider = this.oauthServiceProvider,
             confirm = this.confirm,
             status = this.status,
             id = this.id,
@@ -63,7 +63,7 @@ class MemberEntity (
             email = member.email,
             password = member.password,
             salt = member.salt,
-            authenticationProvider = member.authenticationProvider,
+            oauthServiceProvider = member.oauthServiceProvider,
             confirm = member.confirm,
             status = member.status!!
         )
