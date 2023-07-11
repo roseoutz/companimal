@@ -6,7 +6,7 @@ import com.companimal.member.domain.exception.InvalidFormatPasswordException
 import com.companimal.member.domain.exception.PasswordInvalidException
 import com.companimal.member.infrastructure.persistence.MemberEntity
 import com.companimal.member.infrastructure.persistence.MemberRepository
-import com.companimal.member.test.MemberFixture
+import com.companimal.member.MemberFixture
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

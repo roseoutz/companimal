@@ -1,0 +1,24 @@
+package com.companimal.kms
+
+import com.companimal.common.domain.util.Base64Util
+import com.companimal.kms.domain.util.ServerKeyUtil
+import com.companimal.kms.infrastructure.persistence.ServerKeyEntity
+import java.security.KeyPair
+
+object ServerKeyFixture {
+
+    private fun createKeyPair(): KeyPair =
+        ServerKeyUtil.generateServerKey("RSA", 2048)
+
+    fun serverKeyEntity(): ServerKeyEntity {
+        val keyPair = createKeyPair()
+        return ServerKeyEntity(
+            privateKey = Base64Util.encodeToBase64(keyPair.private.encoded),
+            publicKey = Base64Util.encodeToBase64(keyPair.public.encoded),
+            isDeleted = false,
+            keySize = 2048,
+            algorithm = "RSA"
+        )
+    }
+
+}

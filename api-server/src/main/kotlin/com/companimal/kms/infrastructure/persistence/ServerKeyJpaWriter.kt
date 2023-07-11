@@ -1,6 +1,7 @@
 package com.companimal.kms.infrastructure.persistence
 
 import com.companimal.kms.domain.dto.ServerKey
+import com.companimal.kms.domain.exception.ActiveServerKeyNotExistException
 import com.companimal.kms.domain.persistence.ServerKeyWriter
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,7 +17,7 @@ class ServerKeyJpaWriter(
     }
 
     override fun deleteActiveServerKey() =
-        serverKeyRepository.findByDeleted()
+        (serverKeyRepository.findByIsDeleted() ?: throw ActiveServerKeyNotExistException())
             .let { it.deleteServerKey() }
 
 }

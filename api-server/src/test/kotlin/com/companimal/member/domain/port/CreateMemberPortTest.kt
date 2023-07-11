@@ -2,7 +2,7 @@ package com.companimal.member.domain.port
 
 import com.companimal.member.domain.exception.AlreadyRegisteredEmailException
 import com.companimal.member.infrastructure.persistence.MemberRepository
-import com.companimal.member.test.MemberFixture
+import com.companimal.member.MemberFixture
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

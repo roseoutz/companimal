@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ServerKeyRepository: JpaRepository<ServerKeyEntity, Long> {
 
-    fun findByDeleted(isDeleted: Boolean = false): ServerKeyEntity
+    fun findByIsDeleted(isDeleted: Boolean = false): ServerKeyEntity?
 }

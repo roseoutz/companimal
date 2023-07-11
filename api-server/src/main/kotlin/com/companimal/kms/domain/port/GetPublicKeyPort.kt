@@ -4,5 +4,5 @@ import com.companimal.kms.domain.dto.ServerKey
 
 interface GetPublicKeyPort {
 
-    fun getPublicKey(): ServerKey
+    fun getPublicKey(): ServerKey?
 }

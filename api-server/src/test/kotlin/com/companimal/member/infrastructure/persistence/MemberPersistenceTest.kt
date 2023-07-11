@@ -2,7 +2,7 @@ package com.companimal.member.infrastructure.persistence
 
 import com.companimal.AbstractDataJpaTest
 import com.companimal.member.domain.constants.MemberStatus
-import com.companimal.member.test.MemberFixture
+import com.companimal.member.MemberFixture
 import jakarta.transaction.Transactional
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName

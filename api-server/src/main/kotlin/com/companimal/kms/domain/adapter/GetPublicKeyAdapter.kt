@@ -10,6 +10,6 @@ class GetPublicKeyAdapter(
     private val serverKeyReader: ServerKeyReader,
 ): GetPublicKeyPort {
 
-    override fun getPublicKey(): ServerKey =
+    override fun getPublicKey(): ServerKey? =
         serverKeyReader.findActiveServerKey()
 }

@@ -15,7 +15,7 @@ class ChangeServerKeyAdapter(
 ): ChangeServerKeyPort {
 
     override fun changeServerKey() {
-        deleteServerKeyIfExist()
+        deleteActiveServerKey()
 
         val keyPair = ServerKeyUtil.generateServerKey(getKeyAlgorithm(), getKeySize())
         serverKeyWriter.addServerKey(
@@ -28,10 +28,8 @@ class ChangeServerKeyAdapter(
         )
     }
 
-    private fun deleteServerKeyIfExist() {
-        if (serverKeyReader.findActiveServerKey() != null) {
-            serverKeyWriter.deleteActiveServerKey()
-        }
+    private fun deleteActiveServerKey() {
+        serverKeyWriter.deleteActiveServerKey()
     }
 
     private fun getKeySize(): Int = 2048

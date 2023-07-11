@@ -1,4 +1,4 @@
-package com.companimal.member.test
+package com.companimal.member
 
 import com.companimal.member.domain.constants.MemberStatus
 import com.companimal.member.domain.port.CreateMemberRequest
@@ -26,7 +26,6 @@ object MemberFixture {
     fun createMemberRequest(
         email: String = "zeedoutladzz@gmail.com",
         password: String = "TestPassword123!!",
-        salt: String = "salt1234"
     ): CreateMemberRequest =
         CreateMemberRequest(
             email = email,
