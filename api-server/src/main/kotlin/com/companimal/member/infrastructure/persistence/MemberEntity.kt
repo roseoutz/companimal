@@ -15,8 +15,8 @@ class MemberEntity (
     @Column(name = "email", length = 32, unique = true, nullable = false)
     var email: String,
 
-    @Column(name = "confirm")
-    var confirm: Boolean = false,
+    @Column(name = "is_confirmed")
+    var isConfirmed: Boolean = false,
 
     @Column(name = "password", length = 50, columnDefinition = "text", nullable = false)
     var password: String? = null,
@@ -33,18 +33,18 @@ class MemberEntity (
     val id: Long? = null,
 
     ): BaseEntity() {
-    fun toMember(): Member {
-        return Member(
+    fun toMember(): Member =
+        Member(
             email = this.email,
             password = this.password,
             salt = this.salt,
-            confirm = this.confirm,
+            isConfirmed = this.isConfirmed,
             status = this.status,
             id = this.id,
             createdDatetime = this.createdDatetime,
             updatedDatetime = this.updatedDatetime
         )
-    }
+
 
     fun deleteMember() {
         this.status = MemberStatus.DELETED
@@ -61,7 +61,7 @@ class MemberEntity (
             email = member.email,
             password = member.password,
             salt = member.salt,
-            confirm = member.confirm,
+            isConfirmed = member.isConfirmed,
             status = member.status!!
         )
     }

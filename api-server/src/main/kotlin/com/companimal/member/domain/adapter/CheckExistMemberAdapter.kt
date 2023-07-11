@@ -12,4 +12,8 @@ class CheckExistMemberAdapter(
     override fun isExistMember(email: String): Boolean {
         return memberReader.findByEmail(email) != null
     }
+
+    override fun isExistMember(id: Long): Boolean {
+        return memberReader.findById(id) != null
+    }
 }

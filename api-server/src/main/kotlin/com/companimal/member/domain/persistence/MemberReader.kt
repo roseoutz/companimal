@@ -6,8 +6,6 @@ interface MemberReader {
 
     fun findById(id: Long): Member?
 
-
     fun findByEmail(email: String): Member?
-
 
 }

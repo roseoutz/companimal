@@ -17,8 +17,4 @@ data class CreateMemberRequest(
     @field:Schema(description = "비밀번호", required = true)
     @field:NotBlank
     val password: String,
-
-    @field:Schema(description = "비밀번호 솔트", required = true)
-    @field:NotBlank
-    val salt: String,
 )

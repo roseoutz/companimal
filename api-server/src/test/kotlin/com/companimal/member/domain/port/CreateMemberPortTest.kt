@@ -1,8 +1,8 @@
 package com.companimal.member.domain.port
 
+import com.companimal.member.domain.exception.AlreadyRegisteredEmailException
 import com.companimal.member.infrastructure.persistence.MemberRepository
 import com.companimal.member.test.MemberFixture
-import com.companimal.signIn.domain.exception.AlreadyRegisteredMemberException
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -31,7 +31,7 @@ class CreateMemberPortTest @Autowired constructor(
         val createMemberRequest = MemberFixture.createMemberRequest()
         createMemberPort.signUp(createMemberRequest)
 
-        Assertions.assertThrows(AlreadyRegisteredMemberException::class.java) { createMemberPort.signUp(createMemberRequest) }
+        Assertions.assertThrows(AlreadyRegisteredEmailException::class.java) { createMemberPort.signUp(createMemberRequest) }
     }
 
 }
