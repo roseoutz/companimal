@@ -1,8 +1,8 @@
-package com.companimal.auth.member.infrastructure.persistence
+package com.companimal.member.infrastructure.persistence
 
-import com.companimal.auth.member.domain.dto.Member
-import com.companimal.auth.member.domain.exception.NoSuchMemberException
-import com.companimal.auth.member.domain.persistence.MemberWriter
+import com.companimal.member.domain.dto.Member
+import com.companimal.member.domain.exception.NoSuchMemberException
+import com.companimal.member.domain.persistence.MemberWriter
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -19,14 +19,12 @@ class MemberJpaWriter(
         memberRepository.save(entity)
     }
 
-    override fun updatePassword(id: Long, password: String, salt: String) {
-        val entity = memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException()
-        entity.password = password
-        entity.salt = salt
-    }
+    override fun updatePassword(id: Long, password: String, salt: String) =
+        (memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException())
+            .updatePassword(password, salt)
 
-    override fun deleteMember(id: Long) {
-        val entity = memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException()
-        entity.deleteMember()
-    }
+
+    override fun deleteMember(id: Long) =
+        (memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException())
+            .deleteMember()
 }

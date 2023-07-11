@@ -1,4 +1,4 @@
-package com.companimal.auth.member.domain.constants
+package com.companimal.member.domain.constants
 
 enum class MemberStatus {
     ACTIVE,

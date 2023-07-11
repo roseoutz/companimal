@@ -1,6 +1,6 @@
-package com.companimal.auth.member.domain.port
+package com.companimal.member.domain.port
 
-import com.companimal.auth.member.domain.dto.Member
+import com.companimal.member.domain.dto.Member
 
 interface GetMemberByEmailPort {
 

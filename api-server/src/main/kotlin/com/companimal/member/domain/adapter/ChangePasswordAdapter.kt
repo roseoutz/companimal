@@ -1,15 +1,15 @@
-package com.companimal.auth.member.domain.adapter
+package com.companimal.member.domain.adapter
 
 import com.companimal.common.domain.validation.PasswordValidator
 import com.companimal.crypto.domain.port.HashEncoderPort
-import com.companimal.auth.member.domain.exception.InvalidFormatPasswordException
-import com.companimal.auth.member.domain.exception.NoSuchMemberException
-import com.companimal.auth.member.domain.exception.PasswordInvalidException
-import com.companimal.auth.member.domain.exception.CannotUseSamePasswordException
-import com.companimal.auth.member.domain.persistence.MemberReader
-import com.companimal.auth.member.domain.persistence.MemberWriter
-import com.companimal.auth.member.domain.port.ChangePasswordRequest
-import com.companimal.auth.member.domain.port.ChangePasswordPort
+import com.companimal.member.domain.exception.InvalidFormatPasswordException
+import com.companimal.member.domain.exception.NoSuchMemberException
+import com.companimal.member.domain.exception.PasswordInvalidException
+import com.companimal.member.domain.exception.CannotUseSamePasswordException
+import com.companimal.member.domain.persistence.MemberReader
+import com.companimal.member.domain.persistence.MemberWriter
+import com.companimal.member.domain.port.ChangePasswordRequest
+import com.companimal.member.domain.port.ChangePasswordPort
 import org.springframework.stereotype.Service
 
 @Service

@@ -1,7 +1,7 @@
-package com.companimal.auth.member.infrastructure.persistence
+package com.companimal.member.infrastructure.persistence
 
-import com.companimal.auth.member.domain.dto.Member
-import com.companimal.auth.member.domain.persistence.MemberReader
+import com.companimal.member.domain.dto.Member
+import com.companimal.member.domain.persistence.MemberReader
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

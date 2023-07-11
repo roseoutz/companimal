@@ -1,8 +1,8 @@
-package com.companimal.auth.member.application
+package com.companimal.member.application
 
-import com.companimal.auth.member.application.dto.MemberResponse
-import com.companimal.auth.member.domain.port.*
+import com.companimal.member.application.dto.MemberResponse
 import com.companimal.common.application.dto.ResponseDTO
+import com.companimal.member.domain.port.*
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class MemberController(
     private val getMemberPort: GetMemberPort,
-    private val signUpPort: SignUpPort,
+    private val createMemberPort: CreateMemberPort,
     private val deleteMemberPort: DeleteMemberPort,
     private val changePasswordPort: ChangePasswordPort,
 ) {
@@ -53,9 +53,9 @@ class MemberController(
     fun signUp(
         @Valid
         @RequestBody
-        signUpRequest: SignUpRequest
+        createMemberRequest: CreateMemberRequest
     ): ResponseEntity<ResponseDTO<Any>> {
-        signUpPort.signUp(signUpRequest)
+        createMemberPort.signUp(createMemberRequest)
         return ResponseEntity.ok(ResponseDTO.ok())
     }
 

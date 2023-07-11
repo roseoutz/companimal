@@ -1,6 +1,6 @@
-package com.companimal.auth.member.domain.persistence
+package com.companimal.member.domain.persistence
 
-import com.companimal.auth.member.domain.dto.Member
+import com.companimal.member.domain.dto.Member
 
 interface MemberReader {
 

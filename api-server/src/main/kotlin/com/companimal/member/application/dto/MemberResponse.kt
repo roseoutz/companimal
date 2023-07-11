@@ -1,7 +1,7 @@
-package com.companimal.auth.member.application.dto
+package com.companimal.member.application.dto
 
-import com.companimal.auth.member.domain.constants.MemberStatus
-import com.companimal.auth.member.domain.dto.Member
+import com.companimal.member.domain.constants.MemberStatus
+import com.companimal.member.domain.dto.Member
 import java.time.LocalDateTime
 
 data class MemberResponse(

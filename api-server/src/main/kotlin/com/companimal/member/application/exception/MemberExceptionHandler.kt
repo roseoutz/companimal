@@ -1,12 +1,11 @@
-package com.companimal.auth.member.application.exception
+package com.companimal.member.application.exception
 
 import com.companimal.common.application.dto.ResponseDTO
 import com.companimal.common.application.exception.BaseExceptionHandler
 import com.companimal.common.domain.exception.CompanimalException
-import com.companimal.auth.member.domain.exception.AlreadyRegisteredEmailException
-import com.companimal.auth.member.domain.exception.InvalidFormatPasswordException
-import com.companimal.auth.member.domain.exception.NoSuchMemberException
-import com.companimal.auth.member.domain.exception.PasswordInvalidException
+import com.companimal.member.domain.exception.InvalidFormatPasswordException
+import com.companimal.member.domain.exception.NoSuchMemberException
+import com.companimal.member.domain.exception.PasswordInvalidException
 import org.springframework.core.annotation.Order
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -21,9 +20,6 @@ class MemberExceptionHandler: BaseExceptionHandler() {
 
     @ExceptionHandler(PasswordInvalidException::class)
     fun passwordInvalidExceptionHandler(passwordInvalidException: PasswordInvalidException): ResponseEntity<ResponseDTO<Any>> = response(passwordInvalidException)
-
-    @ExceptionHandler(AlreadyRegisteredEmailException::class)
-    fun alreadyRegisteredEmailExceptionHandler(alreadyRegisteredEmailException: AlreadyRegisteredEmailException): ResponseEntity<ResponseDTO<Any>> = response(alreadyRegisteredEmailException)
 
     @ExceptionHandler(InvalidFormatPasswordException::class)
     fun invalidFormatPasswordExceptionHandler(invalidFormatPasswordException: InvalidFormatPasswordException): ResponseEntity<ResponseDTO<Any>> = response(invalidFormatPasswordException)

@@ -1,7 +1,7 @@
-package com.companimal.auth.member.domain.adapter
+package com.companimal.member.domain.adapter
 
-import com.companimal.auth.member.domain.persistence.MemberWriter
-import com.companimal.auth.member.domain.port.DeleteMemberPort
+import com.companimal.member.domain.persistence.MemberWriter
+import com.companimal.member.domain.port.DeleteMemberPort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

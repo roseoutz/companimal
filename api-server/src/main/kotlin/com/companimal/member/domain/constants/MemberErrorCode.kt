@@ -1,4 +1,4 @@
-package com.companimal.auth.member.domain.constants
+package com.companimal.member.domain.constants
 
 import com.companimal.common.domain.constant.ErrorCode
 

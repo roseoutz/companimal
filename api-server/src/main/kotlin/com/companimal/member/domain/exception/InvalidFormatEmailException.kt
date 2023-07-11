@@ -1,7 +1,7 @@
-package com.companimal.auth.member.domain.exception
+package com.companimal.member.domain.exception
 
 import com.companimal.common.domain.exception.CompanimalException
-import com.companimal.auth.member.domain.constants.MemberErrorCode
+import com.companimal.member.domain.constants.MemberErrorCode
 
 class InvalidFormatEmailException: CompanimalException(errorCode = MemberErrorCode.INVALID_FORMAT_EMAIL) {
 }

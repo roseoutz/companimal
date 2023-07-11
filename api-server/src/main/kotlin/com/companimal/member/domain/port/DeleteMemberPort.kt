@@ -1,4 +1,4 @@
-package com.companimal.auth.member.domain.port
+package com.companimal.member.domain.port
 
 interface DeleteMemberPort {
     fun delete(id: Long)

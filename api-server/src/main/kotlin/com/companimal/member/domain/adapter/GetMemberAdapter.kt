@@ -1,9 +1,9 @@
-package com.companimal.auth.member.domain.adapter
+package com.companimal.member.domain.adapter
 
-import com.companimal.auth.member.domain.dto.Member
-import com.companimal.auth.member.domain.exception.NoSuchMemberException
-import com.companimal.auth.member.domain.persistence.MemberReader
-import com.companimal.auth.member.domain.port.GetMemberPort
+import com.companimal.member.domain.dto.Member
+import com.companimal.member.domain.exception.NoSuchMemberException
+import com.companimal.member.domain.persistence.MemberReader
+import com.companimal.member.domain.port.GetMemberPort
 import org.springframework.stereotype.Service
 
 

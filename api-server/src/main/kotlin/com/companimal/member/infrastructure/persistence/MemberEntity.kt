@@ -1,8 +1,8 @@
-package com.companimal.auth.member.infrastructure.persistence
+package com.companimal.member.infrastructure.persistence
 
 import com.companimal.common.infrastructure.persistence.BaseEntity
-import com.companimal.auth.member.domain.constants.MemberStatus
-import com.companimal.auth.member.domain.dto.Member
+import com.companimal.member.domain.constants.MemberStatus
+import com.companimal.member.domain.dto.Member
 import jakarta.persistence.*
 
 @Entity
@@ -46,9 +46,13 @@ class MemberEntity (
         )
     }
 
-    fun deleteMember(): MemberEntity {
+    fun deleteMember() {
         this.status = MemberStatus.DELETED
-        return this
+    }
+
+    fun updatePassword(password: String, salt: String) {
+        this.password = password
+        this.salt = salt
     }
 
     companion object {

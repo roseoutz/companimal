@@ -1,4 +1,4 @@
-package com.companimal.auth.member.domain.port
+package com.companimal.member.domain.port
 
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
