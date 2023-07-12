@@ -2,7 +2,7 @@ package com.companimal.kms.domain.port
 
 import com.companimal.kms.domain.dto.ServerKey
 
-interface GetPublicKeyPort {
+interface GetServerKeyPort {
 
-    fun getPublicKey(): ServerKey?
+    fun getServerKey(): ServerKey?
 }
