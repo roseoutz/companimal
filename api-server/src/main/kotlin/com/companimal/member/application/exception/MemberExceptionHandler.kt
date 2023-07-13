@@ -3,7 +3,6 @@ package com.companimal.member.application.exception
 import com.companimal.common.application.dto.ResponseDTO
 import com.companimal.common.application.exception.BaseExceptionHandler
 import com.companimal.common.domain.exception.CompanimalException
-import com.companimal.member.domain.exception.AlreadyRegisteredEmailException
 import com.companimal.member.domain.exception.InvalidFormatPasswordException
 import com.companimal.member.domain.exception.NoSuchMemberException
 import com.companimal.member.domain.exception.PasswordInvalidException
@@ -21,9 +20,6 @@ class MemberExceptionHandler: BaseExceptionHandler() {
 
     @ExceptionHandler(PasswordInvalidException::class)
     fun passwordInvalidExceptionHandler(passwordInvalidException: PasswordInvalidException): ResponseEntity<ResponseDTO<Any>> = response(passwordInvalidException)
-
-    @ExceptionHandler(AlreadyRegisteredEmailException::class)
-    fun alreadyRegisteredEmailExceptionHandler(alreadyRegisteredEmailException: AlreadyRegisteredEmailException): ResponseEntity<ResponseDTO<Any>> = response(alreadyRegisteredEmailException)
 
     @ExceptionHandler(InvalidFormatPasswordException::class)
     fun invalidFormatPasswordExceptionHandler(invalidFormatPasswordException: InvalidFormatPasswordException): ResponseEntity<ResponseDTO<Any>> = response(invalidFormatPasswordException)

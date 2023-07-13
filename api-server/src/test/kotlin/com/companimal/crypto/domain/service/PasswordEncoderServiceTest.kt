@@ -43,15 +43,15 @@ class PasswordEncoderServiceTest {
 
     @Test
     fun `should encode with salt`() {
-        val plainText = "test1234"
-        val salt = "testSaltValue"
+        val plainText = "TestPassword123!!"
+        val salt = "salt1234"
 
         val encoded = passwordEncoderService.encode(plainText, salt)
 
 
         Assertions.assertEquals(
-            "C1D0C7301A1A82D10CCFE379E2FC47BABB6AF17EF2C9B6570FBB9BE5FFC4BCA5471E6A102181E6B77095298D1A60912613889EBABC0EE84DA937564A30475101",
-            encoded.uppercase()
+            "26f6430c47cadc8a5a46acc894901775a9bca06a6d2eb25fe1f6d5c3c4c5d59cd963efd7f5a36eb7a61b101ec0410f7c9c36c1bbe18f22f9b0ca997d6296cc19",
+            encoded
         )
     }
 }

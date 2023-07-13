@@ -12,41 +12,47 @@ import jakarta.persistence.*
 )
 class MemberEntity (
 
-    @Column(length = 32, unique = true, nullable = false)
+    @Column(name = "email", length = 32, unique = true, nullable = false)
     var email: String,
 
-    @Column(length = 50, columnDefinition = "text", nullable = false)
-    var password: String,
+    @Column(name = "is_confirmed")
+    var isConfirmed: Boolean = false,
 
-    @Column(length = 32, columnDefinition = "text", nullable = false)
-    var salt: String,
+    @Column(name = "password", length = 50, columnDefinition = "text", nullable = false)
+    var password: String? = null,
 
-    @Column
-    var confirm: Boolean = false,
+    @Column(name = "salt", length = 32, columnDefinition = "text", nullable = false)
+    var salt: String? = null,
 
     @Enumerated(EnumType.STRING)
-    var status: MemberStatus = MemberStatus.ACTIVE,
+    @Column(name = "status")
+    var status: MemberStatus? = MemberStatus.ACTIVE,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-): BaseEntity() {
-    fun toMember(): Member {
-        return Member(
+
+    ): BaseEntity() {
+    fun toMember(): Member =
+        Member(
             email = this.email,
             password = this.password,
             salt = this.salt,
-            confirm = this.confirm,
+            isConfirmed = this.isConfirmed,
             status = this.status,
             id = this.id,
             createdDatetime = this.createdDatetime,
             updatedDatetime = this.updatedDatetime
         )
+
+
+    fun deleteMember() {
+        this.status = MemberStatus.DELETED
     }
 
-    fun deleteMember(): MemberEntity {
-        this.status = MemberStatus.DELETED
-        return this
+    fun updatePassword(password: String, salt: String) {
+        this.password = password
+        this.salt = salt
     }
 
     companion object {
@@ -54,8 +60,8 @@ class MemberEntity (
             id = member.id,
             email = member.email,
             password = member.password,
-            salt = member.salt!!,
-            confirm = member.confirm,
+            salt = member.salt,
+            isConfirmed = member.isConfirmed,
             status = member.status!!
         )
     }

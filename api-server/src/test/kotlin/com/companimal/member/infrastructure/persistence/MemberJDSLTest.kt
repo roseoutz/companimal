@@ -1,7 +1,6 @@
 package com.companimal.member.infrastructure.persistence
 
-import com.companimal.member.infrastructure.persistence.MemberEntity
-import com.companimal.member.infrastructure.persistence.MemberRepository
+import com.companimal.AbstractDataJpaTest
 import com.linecorp.kotlinjdsl.QueryFactory
 import com.linecorp.kotlinjdsl.QueryFactoryImpl
 import com.linecorp.kotlinjdsl.query.creator.CriteriaQueryCreatorImpl
@@ -37,7 +36,7 @@ class MemberJDSLTest @Autowired constructor(
         email = email,
         password = password,
         salt = salt,
-        confirm = confirm,
+        isConfirmed = confirm,
     )
 
     @Test

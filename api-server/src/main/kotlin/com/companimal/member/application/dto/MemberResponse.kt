@@ -16,7 +16,7 @@ data class MemberResponse(
         fun of(member: Member): MemberResponse = MemberResponse(
             id = member.id,
             email = member.email,
-            confirm = member.confirm,
+            confirm = member.isConfirmed,
             status = member.status,
             createdDatetime = member.createdDatetime,
             updatedDatetime = member.updatedDatetime,

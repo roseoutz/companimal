@@ -1,7 +1,7 @@
 package com.companimal.member.application
 
-import com.companimal.common.application.dto.ResponseDTO
 import com.companimal.member.application.dto.MemberResponse
+import com.companimal.common.application.dto.ResponseDTO
 import com.companimal.member.domain.port.*
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/v1/member")
 @RestController
 class MemberController(
-    private val getMemberUseCasePort: GetMemberUseCasePort,
-    private val signUpUseCasePort: SignUpUseCasePort,
-    private val deleteMemberUseCasePort: DeleteMemberUseCasePort,
-    private val changePasswordUseCasePort: ChangePasswordUseCasePort,
+    private val getMemberPort: GetMemberPort,
+    private val createMemberPort: CreateMemberPort,
+    private val deleteMemberPort: DeleteMemberPort,
+    private val changePasswordPort: ChangePasswordPort,
 ) {
 
     @Operation(summary = "사용자 조회", description = "사용자의 id 값을 이용하여 사용자의 정보를 조회한다.")
@@ -37,7 +37,7 @@ class MemberController(
         @PathVariable(name = "id", required = true)
         id: Long
     ): ResponseEntity<ResponseDTO<MemberResponse>> {
-        return ResponseEntity.ok(ResponseDTO.ok(MemberResponse.of(getMemberUseCasePort.get(id))))
+        return ResponseEntity.ok(ResponseDTO.ok(MemberResponse.of(getMemberPort.get(id))))
     }
 
     @Operation(summary = "회원가입", description = "email 정보를 이용하여 회원가입을 진행한다.")
@@ -53,9 +53,9 @@ class MemberController(
     fun signUp(
         @Valid
         @RequestBody
-        signUpRequest: SignUpRequest
+        createMemberRequest: CreateMemberRequest
     ): ResponseEntity<ResponseDTO<Any>> {
-        signUpUseCasePort.signUp(signUpRequest)
+        createMemberPort.signUp(createMemberRequest)
         return ResponseEntity.ok(ResponseDTO.ok())
     }
 
@@ -74,7 +74,7 @@ class MemberController(
         @RequestBody
         changePasswordRequest: ChangePasswordRequest
     ): ResponseEntity<ResponseDTO<Any>> {
-        changePasswordUseCasePort.changePassword(changePasswordRequest)
+        changePasswordPort.changePassword(changePasswordRequest)
         return ResponseEntity.ok(ResponseDTO.ok())
     }
 
@@ -93,7 +93,7 @@ class MemberController(
         @PathVariable(name = "id", required = true)
         id: Long
     ): ResponseEntity<ResponseDTO<Any>> {
-        deleteMemberUseCasePort.delete(id)
+        deleteMemberPort.delete(id)
         return ResponseEntity.ok(ResponseDTO.ok())
     }
 }

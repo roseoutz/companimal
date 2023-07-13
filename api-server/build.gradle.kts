@@ -18,5 +18,6 @@ dependencies {
     implementation("org.postgresql:postgresql:42.5.4")
     implementation("com.h2database:h2")
 
+    implementation("com.auth0:java-jwt:4.4.0")
 
 }

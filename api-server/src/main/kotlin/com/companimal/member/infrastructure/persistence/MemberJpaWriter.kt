@@ -19,14 +19,12 @@ class MemberJpaWriter(
         memberRepository.save(entity)
     }
 
-    override fun updatePassword(id: Long, password: String, salt: String) {
-        val entity = memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException()
-        entity.password = password
-        entity.salt = salt
-    }
+    override fun updatePassword(id: Long, password: String, salt: String) =
+        (memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException())
+            .updatePassword(password, salt)
 
-    override fun deleteMember(id: Long) {
-        val entity = memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException()
-        entity.deleteMember()
-    }
+
+    override fun deleteMember(id: Long) =
+        (memberRepository.findByIdOrNull(id) ?: throw NoSuchMemberException())
+            .deleteMember()
 }

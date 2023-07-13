@@ -1,10 +1,10 @@
 package com.companimal.member.infrastructure.persistence
 
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface MemberRepository: CrudRepository<MemberEntity, Long?> {
+interface MemberRepository: JpaRepository<MemberEntity, Long?> {
 
     fun findByEmail(email: String): MemberEntity?
 }
