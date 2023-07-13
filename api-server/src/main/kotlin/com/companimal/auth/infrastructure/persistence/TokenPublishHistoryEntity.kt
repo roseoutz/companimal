@@ -1,6 +1,5 @@
 package com.companimal.auth.infrastructure.persistence
 
-import com.companimal.auth.domain.constants.SignInSourceType
 import com.companimal.auth.domain.dto.TokenPublishHistory
 import com.companimal.common.infrastructure.persistence.BaseEntity
 import jakarta.persistence.*
@@ -12,12 +11,8 @@ import java.time.LocalDateTime
 )
 class TokenPublishHistoryEntity(
 
-    @Column(name = "session_id", length = 36, nullable = false)
-    var sessionId: String,
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "sign_in_source_type")
-    val signInSourceType: SignInSourceType,
+    @Column(name = "jwt_id", length = 128, nullable = false)
+    var jwtId: String,
 
     @Column(name = "expired_datetime")
     var expiredDateTime: LocalDateTime,
@@ -35,8 +30,7 @@ class TokenPublishHistoryEntity(
 
     fun toTokenPublishHistory(): TokenPublishHistory =
         TokenPublishHistory(
-            sessionId = this.sessionId,
-            signInSourceType = this.signInSourceType,
+            jwtId = this.jwtId,
             expiredDateTime = this.expiredDateTime,
             publishDateTime = this.publishDateTime,
             isExpired = this.isExpired,
@@ -48,8 +42,7 @@ class TokenPublishHistoryEntity(
     companion object {
         fun of(tokenPublishHistory: TokenPublishHistory): TokenPublishHistoryEntity =
             TokenPublishHistoryEntity(
-                sessionId = tokenPublishHistory.sessionId,
-                signInSourceType = tokenPublishHistory.signInSourceType,
+                jwtId = tokenPublishHistory.jwtId,
                 expiredDateTime = tokenPublishHistory.expiredDateTime,
                 publishDateTime = tokenPublishHistory.publishDateTime,
                 isExpired = tokenPublishHistory.isExpired,

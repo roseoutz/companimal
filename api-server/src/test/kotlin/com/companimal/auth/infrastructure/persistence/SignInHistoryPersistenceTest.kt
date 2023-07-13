@@ -10,7 +10,6 @@ import org.junit.jupiter.api.fail
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.transaction.annotation.Transactional
-import java.lang.RuntimeException
 import java.time.LocalDateTime
 import java.util.*
 
@@ -24,6 +23,8 @@ class SignInHistoryPersistenceTest @Autowired private constructor(
         SignInHistoryEntity(
             sessionId = UUID.randomUUID().toString(),
             memberId = 1L,
+            isSuccess = true,
+            signInSourceType = SignInSourceType.WEB
         )
 
     @DisplayName("로그인 이력이 정상 저장된다.")
@@ -43,10 +44,9 @@ class SignInHistoryPersistenceTest @Autowired private constructor(
         val entity = getSignInHistoryEntity().let {
             it.tokenPublishHistoryList.add(
                 TokenPublishHistoryEntity(
-                sessionId = it.sessionId,
-                signInSourceType = SignInSourceType.WEB,
-                expiredDateTime = LocalDateTime.now()
-            )
+                    jwtId = it.sessionId!!,
+                    expiredDateTime = LocalDateTime.now()
+                )
             )
             it
         }
@@ -57,7 +57,7 @@ class SignInHistoryPersistenceTest @Autowired private constructor(
         val tokenFindOne = tokenPublishHistoryRepository.findByIdOrNull(1L) ?: fail(RuntimeException("Token Not Saved"))
 
         assertThat(findOne.sessionId).isEqualTo(entity.sessionId)
-        assertThat(tokenFindOne.sessionId).isEqualTo(entity.sessionId)
+        assertThat(tokenFindOne.jwtId).isEqualTo(entity.sessionId)
     }
 
 }

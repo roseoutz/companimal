@@ -1,15 +1,13 @@
 package com.companimal.auth.domain.dto
 
-import com.companimal.auth.domain.constants.SignInSourceType
 import java.time.LocalDateTime
 
 data class TokenPublishHistory(
-    val sessionId: String,
-    val signInSourceType: SignInSourceType,
+    val jwtId: String,
     val publishDateTime: LocalDateTime,
     val expiredDateTime: LocalDateTime,
     val isExpired: Boolean,
-    val id: Long?,
+    val id: Long? = null,
     val createdDatetime: LocalDateTime? = null,
     val updatedDatetime: LocalDateTime? = null,
 )

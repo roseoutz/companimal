@@ -9,7 +9,7 @@ object MemberFixture {
     fun memberEntity(
         id: Long? = null,
         email: String = "zeedoutladzz@gmail.com",
-        password: String = "TestPassword123!!",
+        password: String = "26f6430c47cadc8a5a46acc894901775a9bca06a6d2eb25fe1f6d5c3c4c5d59cd963efd7f5a36eb7a61b101ec0410f7c9c36c1bbe18f22f9b0ca997d6296cc19",
         salt: String = "salt1234",
         confirm: Boolean = true,
         memberStatus: MemberStatus = MemberStatus.ACTIVE,

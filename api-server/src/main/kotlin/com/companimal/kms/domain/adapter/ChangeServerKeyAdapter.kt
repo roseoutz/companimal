@@ -1,38 +1,24 @@
 package com.companimal.kms.domain.adapter
 
-import com.companimal.common.domain.util.Base64Util
-import com.companimal.kms.domain.dto.ServerKey
-import com.companimal.kms.domain.persistence.ServerKeyReader
 import com.companimal.kms.domain.persistence.ServerKeyWriter
 import com.companimal.kms.domain.port.ChangeServerKeyPort
-import com.companimal.kms.domain.util.ServerKeyUtil
+import com.companimal.kms.domain.port.CreateServerKeyPort
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ChangeServerKeyAdapter(
-    private val serverKeyReader: ServerKeyReader,
     private val serverKeyWriter: ServerKeyWriter,
+    private val createServerKeyPort: CreateServerKeyPort,
 ): ChangeServerKeyPort {
 
+    @Transactional
     override fun changeServerKey() {
         deleteActiveServerKey()
-
-        val keyPair = ServerKeyUtil.generateServerKey(getKeyAlgorithm(), getKeySize())
-        serverKeyWriter.addServerKey(
-            ServerKey(
-                privateKey = Base64Util.encodeToBase64(keyPair.private.encoded),
-                publicKey = Base64Util.encodeToBase64(keyPair.public.encoded),
-                keySize = getKeySize(),
-                algorithm = getKeyAlgorithm(),
-            )
-        )
+        createServerKeyPort.createServerKey()
     }
 
     private fun deleteActiveServerKey() {
         serverKeyWriter.deleteActiveServerKey()
     }
-
-    private fun getKeySize(): Int = 2048
-
-    private fun getKeyAlgorithm(): String = "RSA"
 }

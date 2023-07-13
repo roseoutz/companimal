@@ -34,7 +34,7 @@ class CreateJwtTokenAdapter(
             ))
             .withIssuer(getHostname())
             .withJWTId(jwtId)
-            .withClaim(TokenConstants.TOKEN_CLAIM_KEY.name, payloads)
+            .withClaim(TokenConstants.TOKEN_CLAIM_KEY.value, payloads)
             .withIssuedAt(issuedAt)
             .withExpiresAt(expiredAt)
             .sign(algorithm)
@@ -48,7 +48,7 @@ class CreateJwtTokenAdapter(
     }
 
     private fun getUniqueId(): String =
-        Base64Util.encodeToBase64(getHostname() + UUID.randomUUID().toString())
+        Base64Util.encodeToBase64(UUID.randomUUID().toString())
 
     private fun getHostname(): String =
         InetAddress.getLocalHost().hostName
