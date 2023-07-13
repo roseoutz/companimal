@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 data class SignInHistory(
     val id: Long? = null,
     val sessionId: String? = null,
-    val memberId: Long,
+    val memberId: Long? = null,
     val signInSourceType: SignInSourceType,
     val isSuccess: Boolean,
     val failReason: String? = null,

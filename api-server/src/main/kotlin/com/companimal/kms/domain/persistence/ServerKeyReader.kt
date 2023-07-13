@@ -4,5 +4,5 @@ import com.companimal.kms.domain.dto.ServerKey
 
 interface ServerKeyReader {
 
-    fun findActiveServerKey(): ServerKey
+    fun findActiveServerKey(): ServerKey?
 }

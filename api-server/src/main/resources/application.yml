@@ -9,5 +9,5 @@ spring:
       - 'classpath:profile/application-dev.yml'
       - 'classpath:profile/application-prod.yml'
   profiles:
-    active: local
+    active: test
 

@@ -1,19 +1,18 @@
 package com.companimal.auth.domain.adapter
 
-import com.auth0.jwt.exceptions.JWTCreationException
 import com.companimal.auth.domain.constants.AuthenticationConstants
 import com.companimal.auth.domain.constants.SignInErrorCode
 import com.companimal.auth.domain.constants.SignInSourceType
 import com.companimal.auth.domain.dto.SignInHistory
 import com.companimal.auth.domain.dto.TokenPublishHistory
+import com.companimal.auth.domain.exception.AuthenticationFailException
 import com.companimal.auth.domain.exception.CannotSignInMemberException
+import com.companimal.auth.domain.exception.MemberNotExistException
 import com.companimal.auth.domain.exception.PasswordNotMatchException
-import com.companimal.auth.domain.exception.TokenCreationException
 import com.companimal.auth.domain.persistence.SignInHistoryWriter
 import com.companimal.auth.domain.port.SignInPort
 import com.companimal.auth.domain.port.SignInRequest
 import com.companimal.auth.domain.port.SignInResponse
-import com.companimal.common.domain.exception.CompanimalException
 import com.companimal.crypto.domain.port.HashEncoderPort
 import com.companimal.member.domain.constants.MemberStatus
 import com.companimal.member.domain.dto.Member
@@ -33,11 +32,11 @@ class SignInAdapter(
 ): SignInPort {
 
     override fun signIn(signInRequest: SignInRequest): SignInResponse {
-        val member = memberReader.findByEmail(signInRequest.email)
         val sessionId = signInRequest.sessionId ?: UUID.randomUUID().toString()
         val signInSourceType = signInRequest.signInSourceType ?: SignInSourceType.UNKNOWN
 
         try {
+            val member = memberReader.findByEmail(signInRequest.email) ?: throw MemberNotExistException()
             val tokenInfo = signIn(member, signInRequest)
 
             saveSignInSuccessHistory(
@@ -51,16 +50,16 @@ class SignInAdapter(
                 sessionId = sessionId,
                 token = tokenInfo.token
             )
-        } catch (e: CompanimalException) {
+        } catch (e: AuthenticationFailException) {
             saveSignInFailHistory(
-                memberId = member.id!!,
+                memberId = e.memberId,
                 signInSourceType = signInSourceType,
                 exception = e
             )
 
             throw e
-        } catch (e: JWTCreationException) {
-            throw TokenCreationException()
+        } catch (e: Exception) {
+            throw AuthenticationFailException(errorCode = SignInErrorCode.AUTHENTICATION_ERROR, throwable = e)
         }
     }
 
@@ -81,17 +80,17 @@ class SignInAdapter(
         )
 
         if (!isPasswordMatch) {
-            throw PasswordNotMatchException()
+            throw PasswordNotMatchException(memberId = member.id)
         }
     }
 
     private fun checkMemberStatus(member: Member) {
         if (MemberStatus.ACTIVE != member.status) {
-            throw CannotSignInMemberException(SignInErrorCode.MEMBER_STATUS_NOT_ACTIVE)
+            throw CannotSignInMemberException(memberId = member.id, errorCode = SignInErrorCode.MEMBER_STATUS_NOT_ACTIVE)
         }
 
         if (!member.isConfirmed) {
-            throw CannotSignInMemberException(SignInErrorCode.MEMBER_NOT_CONFIRMED)
+            throw CannotSignInMemberException(memberId = member.id, errorCode = SignInErrorCode.MEMBER_NOT_CONFIRMED)
         }
     }
 
@@ -120,11 +119,11 @@ class SignInAdapter(
         )
 
 
-    private fun saveSignInFailHistory(memberId: Long, signInSourceType: SignInSourceType, exception: CompanimalException) {
+    private fun saveSignInFailHistory(memberId: Long?, signInSourceType: SignInSourceType, exception: AuthenticationFailException) {
         signInHistoryWriter.addSignInHistory(
             SignInHistory(
                 memberId = memberId,
-                isSuccess = true,
+                isSuccess = false,
                 signInSourceType = signInSourceType,
                 failReason = exception.getErrorMessage()
             )

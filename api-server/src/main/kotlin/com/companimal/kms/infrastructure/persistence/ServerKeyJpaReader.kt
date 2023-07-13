@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class ServerKeyJpaReader(
     private val serverKeyRepository: ServerKeyRepository
 ): ServerKeyReader {
-    override fun findActiveServerKey(): ServerKey =
-        ( serverKeyRepository.findByIsDeleted() ?: throw ActiveServerKeyNotExistException() )
-            .let { it.toServerKey() }
+    override fun findActiveServerKey(): ServerKey? =
+        serverKeyRepository.findByIsDeleted()
+            ?.toServerKey()
 }
