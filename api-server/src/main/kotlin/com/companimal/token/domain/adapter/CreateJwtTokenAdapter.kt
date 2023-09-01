@@ -6,7 +6,6 @@ import com.companimal.common.domain.util.Base64Util
 import com.companimal.kms.domain.port.GetServerKeyPort
 import com.companimal.token.domain.constants.TokenConstants
 import com.companimal.token.domain.dto.Token
-import com.companimal.token.domain.exception.ServerKeyNotFoundException
 import com.companimal.token.domain.port.CreateTokenPort
 import org.springframework.stereotype.Service
 import java.net.InetAddress
@@ -20,7 +19,7 @@ class CreateJwtTokenAdapter(
 ): CreateTokenPort {
     override fun createToken(payloads: Map<String, Any>): Token {
 
-        val serverKey = getServerKeyPort.getServerKey() ?: throw ServerKeyNotFoundException()
+        val serverKey = getServerKeyPort.getServerKey()
 
         val algorithm = Algorithm.HMAC512(serverKey.privateKey)
         val jwtId = getUniqueId()

@@ -8,7 +8,6 @@ import com.companimal.kms.domain.port.GetServerKeyPort
 import com.companimal.token.domain.dto.VerifiedDecodedToken
 import com.companimal.token.domain.exception.AlreadyExpiredTokenException
 import com.companimal.token.domain.exception.ServerKeyIdNotMatchException
-import com.companimal.token.domain.exception.ServerKeyNotFoundException
 import com.companimal.token.domain.port.VerifyTokenPort
 import org.springframework.stereotype.Service
 import java.util.*
@@ -26,7 +25,7 @@ class VerifyJwtTokenAdapter(
     }
 
     private fun decodeToken(token: String): DecodedJWT {
-        val serverKey = getServerKeyPort.getServerKey() ?: throw ServerKeyNotFoundException()
+        val serverKey = getServerKeyPort.getServerKey()
         val decodedJWT =  JWT.decode(token)
 
         if (serverKey.id.toString() != decodedJWT.keyId) {

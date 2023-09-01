@@ -54,7 +54,7 @@ class MemberController(
         @Valid
         @RequestBody
         createMemberRequest: CreateMemberRequest
-    ): ResponseEntity<ResponseDTO<Any>> {
+    ): ResponseEntity<ResponseDTO<Unit>> {
         createMemberPort.signUp(createMemberRequest)
         return ResponseEntity.ok(ResponseDTO.ok())
     }
@@ -73,7 +73,7 @@ class MemberController(
         @Valid
         @RequestBody
         changePasswordRequest: ChangePasswordRequest
-    ): ResponseEntity<ResponseDTO<Any>> {
+    ): ResponseEntity<ResponseDTO<Unit>> {
         changePasswordPort.changePassword(changePasswordRequest)
         return ResponseEntity.ok(ResponseDTO.ok())
     }
