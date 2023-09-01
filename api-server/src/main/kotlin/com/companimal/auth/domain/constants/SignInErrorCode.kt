@@ -9,7 +9,8 @@ enum class SignInErrorCode(private val errorMessage: String): ErrorCode {
     MEMBER_STATUS_NOT_ACTIVE("로그인 할 수 없는 사용자입니다."),
     MEMBER_NOT_CONFIRMED("이메일 인증이 완료되지 않은 사용자입니다."),
 
-    ERROR_DURING_TOKEN_CREATION("로그인 과정 중 오류가 발생하였습니다."),
+    TOKEN_INVALID("토큰이 옳바르지 않습니다."),
+
     ;
 
     override fun getErrorCode(): String = this.name

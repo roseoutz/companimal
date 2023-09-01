@@ -11,7 +11,7 @@ import java.time.LocalDateTime
 )
 class TokenPublishHistoryEntity(
 
-    @Column(name = "jwt_id", length = 128, nullable = false)
+    @Column(name = "jwt_id", length = 128, nullable = false, unique = true)
     var jwtId: String,
 
     @Column(name = "expired_datetime")

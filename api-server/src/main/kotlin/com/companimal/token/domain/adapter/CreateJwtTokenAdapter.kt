@@ -29,9 +29,7 @@ class CreateJwtTokenAdapter(
         val expiredAt = Date.from(now.plusMinutes(24 * 60).atZone(ZoneId.systemDefault()).toInstant())
 
         val token = JWT.create()
-            .withHeader(mapOf(
-                TokenConstants.TOKEN_SIGN_KEY_ID.value to serverKey.id
-            ))
+            .withKeyId(serverKey.id.toString())
             .withIssuer(getHostname())
             .withJWTId(jwtId)
             .withClaim(TokenConstants.TOKEN_CLAIM_KEY.value, payloads)

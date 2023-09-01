@@ -1,4 +1,15 @@
 package com.companimal.auth.infrastructure.persistence
 
-class TokenPublishHistoryJpaReader {
+import com.companimal.auth.domain.dto.TokenPublishHistory
+import com.companimal.auth.domain.persistence.TokenPublishHistoryReader
+import org.springframework.stereotype.Service
+
+@Service
+class TokenPublishHistoryJpaReader(
+    private val tokenPublishHistoryRepository: TokenPublishHistoryRepository
+): TokenPublishHistoryReader {
+    override fun getTokenPublishHistory(jwtId: String): TokenPublishHistory? =
+        tokenPublishHistoryRepository.findByJwtId(jwtId)?.toTokenPublishHistory()
+
+
 }
