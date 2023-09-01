@@ -19,7 +19,7 @@ class CreateMemberRequestValidationTest {
 
     @Test
     fun `should throw email is null`() {
-        val createMemberRequest = MemberFixture.createMemberRequest()
+        val createMemberRequest = MemberFixture.createMemberRequest(email = "")
 
         val violation = validator.validate(createMemberRequest)
 
@@ -29,7 +29,7 @@ class CreateMemberRequestValidationTest {
 
     @Test
     fun `should throw password is null`() {
-        val createMemberRequest = MemberFixture.createMemberRequest()
+        val createMemberRequest = MemberFixture.createMemberRequest(password = "")
 
         val violation = validator.validate(createMemberRequest)
 

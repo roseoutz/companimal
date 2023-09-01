@@ -59,7 +59,7 @@ class CreateTokenTest {
 
         val decodedToken = JWT.decode(token)
 
-        Assertions.assertEquals("k", decodedToken.issuer)
+        Assertions.assertEquals(getHostname(), decodedToken.issuer)
     }
 
     @Test

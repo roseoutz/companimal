@@ -2,21 +2,32 @@ package com.companimal.token.port
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import com.companimal.MockingTestExtension
+import com.companimal.kms.ServerKeyFixture
+import com.companimal.kms.domain.port.GetServerKeyPort
 import com.companimal.kms.infrastructure.persistence.ServerKeyRepository
-import com.companimal.token.domain.port.CreateTokenPort
+import com.companimal.token.domain.adapter.CreateJwtTokenAdapter
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+import org.mockito.Mock
+import org.mockito.Mockito
 
-@SpringBootTest
-class CreateTokenPortTest @Autowired constructor(
-    private val createTokenPort: CreateTokenPort,
-    private val serverKeyRepository: ServerKeyRepository
-){
+
+class CreateTokenPortTest: MockingTestExtension() {
+
+    @Mock
+    private lateinit var getServerKeyPort: GetServerKeyPort
+
+    @Mock
+    private lateinit var serverKeyRepository: ServerKeyRepository
 
     @Test
     fun `should create JWT Token`() {
+        val serverKey = ServerKeyFixture.serverKeyEntity()
+        Mockito.`when`(serverKeyRepository.findByIsDeleted()).thenReturn(serverKey)
+        Mockito.`when`(getServerKeyPort.getServerKey()).thenReturn(serverKey.toServerKey())
+        val createTokenPort = CreateJwtTokenAdapter(getServerKeyPort)
+
         val payloads = mapOf(
             "username" to "test",
             "age" to 12,
@@ -24,9 +35,9 @@ class CreateTokenPortTest @Autowired constructor(
         )
         val token = createTokenPort.createToken(payloads)
 
-        val serverKey = serverKeyRepository.findByIsDeleted()!!
+        val activeServerKey = serverKeyRepository.findByIsDeleted()!!
 
-        val decoded = JWT.require(Algorithm.HMAC512(serverKey.privateKey)).build()
+        val decoded = JWT.require(Algorithm.HMAC512(activeServerKey.privateKey)).build()
             .verify(token.token)
 
         val payloadData = decoded.claims["data"]?.asMap()

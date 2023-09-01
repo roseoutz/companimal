@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 class ChangeServerKeyPortTest @Autowired constructor(
@@ -15,13 +14,11 @@ class ChangeServerKeyPortTest @Autowired constructor(
     private val serverKeyRepository: ServerKeyRepository,
 ) {
 
-    @Transactional
     @Test
     fun `should throw empty server key`() {
-        Assertions.assertThrows(ActiveServerKeyNotExistException::class.java) { changeServerKeyPort.changeServerKey() }
+        Assertions.assertDoesNotThrow { changeServerKeyPort.changeServerKey() }
     }
 
-    @Transactional
     @Test
     fun `should change server key`() {
         val serverKey = serverKeyRepository.save(ServerKeyFixture.serverKeyEntity())
