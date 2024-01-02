@@ -31,9 +31,9 @@ class SignInHistoryPersistenceTest @Autowired private constructor(
     @Test
     fun `should save sign in history`() {
         val entity = getSignInHistoryEntity()
-        signInHistoryRepository.save(entity)
+        val saved = signInHistoryRepository.saveAndFlush(entity)
 
-        val findOne = signInHistoryRepository.findByIdOrNull(1L) ?: Assertions.fail()
+        val findOne = signInHistoryRepository.findByIdOrNull(saved.id) ?: Assertions.fail()
 
         assertThat(findOne.sessionId).isEqualTo(entity.sessionId)
     }

@@ -18,8 +18,8 @@ class GetMemberPortTest @Autowired constructor(
 
     @Test
     fun `should get by user by id`() {
-        val memberEntity = MemberFixture.memberEntity()
-        val savedEntity = memberRepository.save(memberEntity)
+        val memberEntity = MemberFixture.memberEntity(email = "shouldGetByUser@test.com")
+        val savedEntity = memberRepository.saveAndFlush(memberEntity)
 
         val member = getMemberPort.get(savedEntity.id!!)
 
@@ -29,7 +29,7 @@ class GetMemberPortTest @Autowired constructor(
 
     @Test
     fun `should getById throw NoSuchMemberException`() {
-        val id = 1L
+        val id = 99999999L
 
         Assertions.assertThrows(NoSuchMemberException::class.java) {
             getMemberPort.get(id)

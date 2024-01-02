@@ -31,7 +31,7 @@ class MemberPersistenceTest(
 
         val findOne = memberRepository.findByIdOrNull(entity.id!!) ?: Assertions.fail("사용자 등록 실패")
 
-        Assertions.assertEquals("test@companimal.com", findOne.email)
+        Assertions.assertEquals("zeedoutladzz@gmail.com", findOne.email)
     }
 
     @DisplayName("등록된 사용자의 비밀번호를 변경한다.")

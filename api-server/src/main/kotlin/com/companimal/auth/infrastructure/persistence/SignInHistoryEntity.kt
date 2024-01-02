@@ -15,8 +15,8 @@ class SignInHistoryEntity(
     @Column(name = "session_id", length = 128, unique = true)
     val sessionId: String? = null,
 
-    @Column(name = "member_id", nullable = false)
-    val memberId: Long,
+    @Column(name = "member_id")
+    val memberId: Long? = null,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "sign_in_source_type")

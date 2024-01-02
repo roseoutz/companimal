@@ -18,8 +18,8 @@ class GetMemberByEmailPortTest @Autowired constructor(
 
     @Test
     fun `should get by user by email`() {
-        val memberEntity = MemberFixture.memberEntity()
-        memberRepository.save(memberEntity)
+        val memberEntity = MemberFixture.memberEntity(email = "shoudGeyUserByEmail@test.com")
+        memberRepository.saveAndFlush(memberEntity)
 
         val member = getMemberByEmailPort.get(memberEntity.email)
 

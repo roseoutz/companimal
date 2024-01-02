@@ -1,5 +1,7 @@
 package com.companimal.member.domain.adapter
 
+import com.companimal.auth.domain.constants.SignInErrorCode
+import com.companimal.auth.domain.exception.AuthenticationFailException
 import com.companimal.common.domain.validation.EmailValidator
 import com.companimal.common.domain.validation.PasswordValidator
 import com.companimal.crypto.domain.port.HashEncoderPort
@@ -45,6 +47,11 @@ class CreateMemberAdapter(
             throw InvalidFormatEmailException()
         }
 
-        memberReader.findByEmail(createMemberRequest.email)?.run { throw AlreadyRegisteredEmailException() }
+        val member = memberReader.findByEmail(createMemberRequest.email)
+
+        if (member != null) {
+            throw AlreadyRegisteredEmailException()
+        }
+
     }
 }

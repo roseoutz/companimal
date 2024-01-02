@@ -42,13 +42,13 @@ class MemberJDSLTest @Autowired constructor(
     @Test
     fun `should get member data`() {
         val entity = getMemberEntity()
-        memberRepository.save(entity)
+        val saved = memberRepository.saveAndFlush(entity)
 
         val findOne = getQueryFactory().selectQuery(MemberEntity::class.java) {
             select(entity(MemberEntity::class))
             from(entity(MemberEntity::class))
             where(
-                and(column(MemberEntity::id).equal(1L))
+                and(column(MemberEntity::id).equal(saved.id))
             )
         }.resultStream.findFirst() ?: Assertions.fail()
 
