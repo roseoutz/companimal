@@ -2,9 +2,9 @@ package com.companimal.auth.infrastructure.persistence
 
 import com.companimal.auth.domain.dto.TokenPublishHistory
 import com.companimal.auth.domain.persistence.TokenPublishHistoryReader
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
+@Component
 class TokenPublishHistoryJpaReader(
     private val tokenPublishHistoryRepository: TokenPublishHistoryRepository
 ): TokenPublishHistoryReader {
