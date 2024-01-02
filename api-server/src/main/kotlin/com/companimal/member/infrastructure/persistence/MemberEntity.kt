@@ -1,6 +1,7 @@
 package com.companimal.member.infrastructure.persistence
 
 import com.companimal.common.infrastructure.persistence.BaseEntity
+import com.companimal.member.domain.constants.MemberRole
 import com.companimal.member.domain.constants.MemberStatus
 import com.companimal.member.domain.dto.Member
 import jakarta.persistence.*
@@ -28,6 +29,10 @@ class MemberEntity (
     @Column(name = "status")
     var status: MemberStatus? = MemberStatus.ACTIVE,
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    var role: MemberRole? = MemberRole.USER,
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -40,6 +45,7 @@ class MemberEntity (
             salt = this.salt,
             isConfirmed = this.isConfirmed,
             status = this.status,
+            role = this.role,
             id = this.id,
             createdDatetime = this.createdDatetime,
             updatedDatetime = this.updatedDatetime

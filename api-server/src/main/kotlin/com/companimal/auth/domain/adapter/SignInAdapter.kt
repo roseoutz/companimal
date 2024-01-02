@@ -97,7 +97,8 @@ class SignInAdapter(
     private fun extractTokenInfoFromMember(member: Member): Map<String, Any> =
         mapOf(
             AuthenticationConstants.TOKEN_CLAIM_USER_ID.value to member.id!!,
-            AuthenticationConstants.TOKEN_CLAIM_EMAIL.value to member.email
+            AuthenticationConstants.TOKEN_CLAIM_EMAIL.value to member.email,
+            AuthenticationConstants.TOKEN_CLAIM_ROLE.value to member.role!!.toString()
         )
 
     private fun saveSignInSuccessHistory(memberId: Long, sessionId: String, signInSourceType: SignInSourceType, token: Token) =

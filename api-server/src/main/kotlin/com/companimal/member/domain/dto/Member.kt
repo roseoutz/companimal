@@ -1,5 +1,6 @@
 package com.companimal.member.domain.dto
 
+import com.companimal.member.domain.constants.MemberRole
 import com.companimal.member.domain.constants.MemberStatus
 import java.time.LocalDateTime
 
@@ -10,6 +11,9 @@ data class Member(
     val salt: String? = null,
     val isConfirmed: Boolean = false,
     val status: MemberStatus? = MemberStatus.IN_ACTIVE,
+    val role: MemberRole? = MemberRole.USER,
     val createdDatetime: LocalDateTime? = null,
     val updatedDatetime: LocalDateTime? = null,
-)
+) {
+
+}

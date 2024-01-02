@@ -3,6 +3,7 @@ package com.companimal.member.domain.port
 import com.companimal.member.domain.exception.AlreadyRegisteredEmailException
 import com.companimal.member.infrastructure.persistence.MemberRepository
 import com.companimal.member.MemberFixture
+import com.companimal.member.domain.constants.MemberRole
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,6 +25,7 @@ class CreateMemberPortTest @Autowired constructor(
         val entity = memberRepository.findByEmail(createMemberRequest.email)
 
         Assertions.assertNotNull(entity)
+        Assertions.assertEquals(MemberRole.USER, entity?.role)
     }
 
     @Test
