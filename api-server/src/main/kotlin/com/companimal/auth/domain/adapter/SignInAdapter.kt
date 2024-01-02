@@ -64,7 +64,12 @@ class SignInAdapter(
     }
 
     private fun signIn(member: Member, signInRequest: SignInRequest): Token {
-        checkPassword(signInRequest, member)
+        val isMatchPassword = checkPassword(signInRequest.password, member.password!!, member.salt!!)
+
+        if (!isMatchPassword) {
+            throw PasswordNotMatchException(memberId = member.id)
+        }
+
         checkMemberStatus(member)
 
         val tokenClaimInfo = extractTokenInfoFromMember(member)
@@ -72,17 +77,12 @@ class SignInAdapter(
         return createTokenPort.createToken(tokenClaimInfo)
     }
 
-    private fun checkPassword(signInRequest: SignInRequest, member: Member) {
-        val isPasswordMatch = hashEncoderPort.match(
-            plainText = signInRequest.password,
-            salt = member.salt,
-            encodeText = member.password!!
+    private fun checkPassword(requestPassword: String, password: String, salt: String): Boolean =
+        hashEncoderPort.match(
+            plainText = requestPassword,
+            salt = salt,
+            encodeText = password
         )
-
-        if (!isPasswordMatch) {
-            throw PasswordNotMatchException(memberId = member.id)
-        }
-    }
 
     private fun checkMemberStatus(member: Member) {
         if (MemberStatus.ACTIVE != member.status) {
